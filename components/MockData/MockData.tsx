@@ -10,7 +10,7 @@ const MockData: FC<Props> = ({ data }) => {
 
   return (
     <div>
-      <h1>Mock Data preview</h1>
+      <h1>Mock Data </h1>
       <code>{JSON.stringify(jsonData)}</code>
     </div>
   )
