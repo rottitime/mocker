@@ -16,10 +16,24 @@ const Home: NextPage = () => {
             <th>Name</th>
             <th>Type</th>
           </tr>
+          <tr>
+            <td>
+              <input type="text" name="field_name" />
+            </td>
+            <td>
+              <select>
+                {options.map((value) => (
+                  <option key={value}>{value}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
         </table>
       </form>
     </>
   )
 }
+
+const options = ['email', 'id', 'first anme']
 
 export default Home
