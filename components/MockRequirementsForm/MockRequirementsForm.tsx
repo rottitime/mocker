@@ -48,15 +48,19 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit }) => {
             ))}
           </tbody>
         </table>
+
+        <button
+          onClick={(e) => {
+            append({ field_name: '', field_type: '' })
+            e.preventDefault()
+          }}
+        >
+          Add another field
+        </button>
+        <br />
+
         <button>Submit</button>
       </form>
-      <button
-        onClick={(e) => {
-          append({ field_name: '', field_type: '' })
-        }}
-      >
-        Add another field
-      </button>
     </>
   )
 }

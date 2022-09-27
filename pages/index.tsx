@@ -1,8 +1,13 @@
-import MockRequirementsForm from '@/components/forms/MockRequirementsForm/MockRequirementsForm'
+import MockData from '@/components/MockData/MockData'
+import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
+import { FormValues } from '@/components/MockRequirementsForm/types'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useState } from 'react'
 
 const Home: NextPage = () => {
+  const [data, setData] = useState<FormValues>()
+
   return (
     <>
       <Head>
@@ -11,12 +16,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MockRequirementsForm
-        onSubmit={(data) => {
-          // eslint-disable-next-line no-console
-          console.log(data)
-        }}
-      />
+      {!!data ? (
+        <MockData data={data.fields} />
+      ) : (
+        <MockRequirementsForm onSubmit={setData} />
+      )}
     </>
   )
 }
