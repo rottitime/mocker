@@ -2,8 +2,8 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - feature/static-docs
-    paths: ['**/*.tsx'] # Trigger the action only when files change in the folders defined here
+      - main
+    paths: ['**/*.tsx', '**/*.ts'] # Trigger the action only when files change in the folders defined here
 permissions:
   contents: write
 jobs:
