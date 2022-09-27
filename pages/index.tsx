@@ -1,3 +1,4 @@
+import MockRequirementsForm from '@/components/forms/MockRequirementsForm/MockRequirementsForm'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
@@ -10,30 +11,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <form>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-          </tr>
-          <tr>
-            <td>
-              <input type="text" name="field_name" />
-            </td>
-            <td>
-              <select>
-                {options.map((value) => (
-                  <option key={value}>{value}</option>
-                ))}
-              </select>
-            </td>
-          </tr>
-        </table>
-      </form>
+      <MockRequirementsForm />
     </>
   )
 }
-
-const options = ['email', 'id', 'first anme']
 
 export default Home
