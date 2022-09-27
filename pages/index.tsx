@@ -11,7 +11,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MockRequirementsForm />
+      <MockRequirementsForm
+        onSubmit={(data) => {
+          // eslint-disable-next-line no-console
+          console.log(data)
+        }}
+      />
     </>
   )
 }

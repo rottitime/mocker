@@ -1,15 +1,8 @@
+import { FC } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
+import { Props, FormValues } from './types'
 
-type Fields = {
-  field_name: string
-  field_type: string
-}
-
-type FormValues = {
-  fields: Fields[]
-}
-
-const MockRequirementsForm = () => {
+const MockRequirementsForm: FC<Props> = ({ onSubmit }) => {
   const { control, register, handleSubmit } = useForm<FormValues>()
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
@@ -18,12 +11,7 @@ const MockRequirementsForm = () => {
 
   return (
     <>
-      <form
-        onSubmit={handleSubmit((data) => {
-          // eslint-disable-next-line no-console
-          console.log(data)
-        })}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <table>
           <thead>
             <tr>
