@@ -16,7 +16,11 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {!!data ? <MockData data={data} /> : <MockRequirementsForm onSubmit={setData} />}
+      {!!data ? (
+        <MockData data={data.fields} />
+      ) : (
+        <MockRequirementsForm onSubmit={setData} />
+      )}
     </>
   )
 }

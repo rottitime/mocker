@@ -1,5 +1,5 @@
 import { FormValues } from '../MockRequirementsForm/types'
 
 export type Props = {
-  data: FormValues
+  data: FormValues['fields']
 }
