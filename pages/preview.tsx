@@ -3,11 +3,11 @@ import useFetch from '@/hooks/useFetch'
 
 const PreviewPage = () => {
   const router = useRouter()
-
-  const query = router?.query || {}
-  const url = query && `/mock?${new URLSearchParams(query as Record<string, string>)}`
+  const query = router?.query
+  const url = !!Object.keys(query).length
+    ? `/mock?${new URLSearchParams(query as Record<string, string>)}`
+    : ''
   const { loading, data, isError } = useFetch(url)
-
   const fullUrl = data && `${window.location.origin}/api${url}`
 
   if (loading) return <p>Loading...</p>
