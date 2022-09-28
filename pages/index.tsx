@@ -28,3 +28,8 @@ const Home: NextPage = () => {
 }
 
 export default Home
+
+/*
+TODO: Submit to new page qith querystring. Example:
+https://stackoverflow.com/a/73883066/2190488
+ */
