@@ -1,22 +1,21 @@
-import MockData from '@/components/MockData/MockData'
-import { decodeObject } from '@/lib'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
+import useFetch from '@/hooks/useFetch'
 
 const PreviewPage = () => {
   const router = useRouter()
 
-  const data = useMemo(() => {
-    const { fields } = router?.query
-    if (fields) return decodeObject(fields.toString())
-    return []
-  }, [router?.query])
+  const query = router?.query || {}
+  const { loading, data, isError } = useFetch(
+    query && `/mock?${new URLSearchParams(query as Record<string, string>)}`
+  )
 
+  if (loading) return <p>Loading...</p>
+  if (isError) return <p>OOps something went wrong, please try again later.</p>
   return (
-    <div>
-      PreviewPage
-      <MockData data={data} />
-    </div>
+    <>
+      <h1>PreviewPage</h1>
+      {data && <code>{JSON.stringify(data)}</code>}
+    </>
   )
 }
 
