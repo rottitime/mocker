@@ -1,4 +1,5 @@
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
+import { encodeObject } from '@/lib'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
@@ -18,7 +19,7 @@ const Home: NextPage = () => {
         onSubmit={(data) =>
           Router.push({
             pathname: '/preview',
-            query: { fields: encodeURIComponent(JSON.stringify(data.fields)) }
+            query: { fields: encodeObject(data.fields) }
           })
         }
       />
