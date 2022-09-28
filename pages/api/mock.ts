@@ -1,9 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { decodeObject } from '@/lib'
+import { decodeObject, runMiddleware } from '@/lib'
 import { Fields } from '@/components/MockRequirementsForm/types'
 import { faker } from '@faker-js/faker'
+import Cors from 'cors'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+const cors = Cors({
+  methods: ['GET']
+})
+
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { fields } = req.query
 
   if (fields) {
@@ -15,6 +20,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
       }),
       {}
     )
+    await runMiddleware(req, res, cors)
+
     res.status(200).json(jsonData)
   }
 }
