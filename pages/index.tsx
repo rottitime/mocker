@@ -1,13 +1,9 @@
-import MockData from '@/components/MockData/MockData'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
-import { FormValues } from '@/components/MockRequirementsForm/types'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useState } from 'react'
+import Router from 'next/router'
 
 const Home: NextPage = () => {
-  const [data, setData] = useState<FormValues>()
-
   return (
     <>
       <Head>
@@ -18,11 +14,14 @@ const Home: NextPage = () => {
 
       <h1>Mocker v1</h1>
 
-      {!!data ? (
-        <MockData data={data.fields} />
-      ) : (
-        <MockRequirementsForm onSubmit={setData} />
-      )}
+      <MockRequirementsForm
+        onSubmit={(data) =>
+          Router.push({
+            pathname: '/preview',
+            query: { fields: encodeURIComponent(JSON.stringify(data.fields)) }
+          })
+        }
+      />
     </>
   )
 }
