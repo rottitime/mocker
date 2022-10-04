@@ -3,7 +3,12 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit }) => {
-  const { control, register, handleSubmit } = useForm<FormValues>()
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormValues>()
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
     name: 'fields'
@@ -24,16 +29,29 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit }) => {
             {fields.map((field, index) => (
               <tr key={field.id}>
                 <td>
-                  <input type="text" {...register(`fields.${index}.field_name`)} />
+                  <input
+                    type="text"
+                    {...register(`fields.${index}.field_name`, {
+                      required: true,
+                      maxLength: 30
+                    })}
+                  />
+                  {errors.fields?.[index]?.field_name && <p>This is a required field</p>}
                 </td>
 
                 <td>
-                  <select {...register(`fields.${index}.field_type`)}>
+                  <select
+                    {...register(`fields.${index}.field_type`, {
+                      required: true,
+                      maxLength: 30
+                    })}
+                  >
                     <option>Select</option>
                     {options.map((value) => (
                       <option key={value}>{value}</option>
                     ))}
                   </select>
+                  {errors.fields?.[index]?.field_type && <p>This is a required field</p>}
                 </td>
                 <td>
                   <button
@@ -59,7 +77,7 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit }) => {
         </button>
         <br />
 
-        <button>Submit</button>
+        <button disabled={!fields.length}>Submit</button>
       </form>
     </>
   )
