@@ -1,7 +1,15 @@
-import React from 'react'
+import { FC } from 'react'
+import { Props } from './types'
+import { encodeObject } from '@/lib'
 
-function PreviewUrl() {
-  return <div>PreviewUrl</div>
+const PreviewUrl: FC<Props> = ({ fields }) => {
+  const url = `${window.location.origin}/api/mock?fields=${encodeObject(fields)}`
+
+  return (
+    <a href={url} target="_blank" rel="noreferrer">
+      {url}
+    </a>
+  )
 }
 
 export default PreviewUrl

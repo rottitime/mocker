@@ -4,8 +4,12 @@ import { encodeObject } from '@/lib'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
+import { useState } from 'react'
+import { Fields } from '@/types'
 
 const Home: NextPage = () => {
+  const [fields, setFields] = useState<Fields[]>([])
+
   return (
     <>
       <Head>
@@ -20,18 +24,23 @@ const Home: NextPage = () => {
         <div>
           <h2>Form</h2>
           <MockRequirementsForm
-            onSubmit={
-              (data) => console.log({ data })
-              // Router.push({
-              //   pathname: '/preview',
-              //   query: { fields: encodeObject(data.fields) }
-              // })
-            }
+            onSubmit={({ fields }) => {
+              setFields(fields)
+              Router.push({
+                pathname: '/preview',
+                query: { fields: encodeObject(fields) }
+              })
+            }}
           />
         </div>
         <div>
           <h2>Preview</h2>
-          <PreviewUrl />
+          {!!fields?.length && (
+            <>
+              <PreviewUrl fields={fields} />
+              <code>{encodeObject(fields)}</code>
+            </>
+          )}
         </div>
       </div>
     </>

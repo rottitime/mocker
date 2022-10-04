@@ -2,13 +2,13 @@ import { FC } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 
-const MockRequirementsForm: FC<Props> = ({ onSubmit }) => {
+const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const {
     control,
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormValues>()
+  } = useForm<FormValues>({ defaultValues })
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
     name: 'fields'

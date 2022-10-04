@@ -5,5 +5,6 @@ export type FormValues = {
 }
 
 export type Props = {
+  defaultValues?: FormValues
   onSubmit: (data: FormValues) => void
 }
