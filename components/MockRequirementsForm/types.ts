@@ -1,7 +1,4 @@
-export type Fields = {
-  field_name: string
-  field_type: string
-}
+import { Fields } from '@/types'
 
 export type FormValues = {
   fields: Fields[]

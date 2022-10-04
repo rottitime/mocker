@@ -1,4 +1,5 @@
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
+import PreviewUrl from '@/components/PreviewUrl/PreviewUrl'
 import { encodeObject } from '@/lib'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -15,14 +16,24 @@ const Home: NextPage = () => {
 
       <h1>Mocker v1</h1>
 
-      <MockRequirementsForm
-        onSubmit={(data) =>
-          Router.push({
-            pathname: '/preview',
-            query: { fields: encodeObject(data.fields) }
-          })
-        }
-      />
+      <div style={{ display: 'flex', gap: 30 }}>
+        <div>
+          <h2>Form</h2>
+          <MockRequirementsForm
+            onSubmit={
+              (data) => console.log({ data })
+              // Router.push({
+              //   pathname: '/preview',
+              //   query: { fields: encodeObject(data.fields) }
+              // })
+            }
+          />
+        </div>
+        <div>
+          <h2>Preview</h2>
+          <PreviewUrl />
+        </div>
+      </div>
     </>
   )
 }

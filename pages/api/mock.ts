@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { decodeObject, runMiddleware } from '@/lib'
-import { Fields } from '@/components/MockRequirementsForm/types'
+import { Fields } from '@/types'
 import { faker } from '@faker-js/faker'
 import Cors from 'cors'
 
