@@ -15,14 +15,19 @@ const Home: NextPage = () => {
 
       <h1>Mocker v1</h1>
 
-      <MockRequirementsForm
-        onSubmit={(data) =>
-          Router.push({
-            pathname: '/preview',
-            query: { fields: encodeObject(data.fields) }
-          })
-        }
-      />
+      <div style={{ display: 'flex', gap: 30 }}>
+        <div>
+          <h2>Form</h2>
+          <MockRequirementsForm
+            onSubmit={({ fields }) => {
+              Router.push({
+                pathname: '/preview',
+                query: { fields: encodeObject(fields) }
+              })
+            }}
+          />
+        </div>
+      </div>
     </>
   )
 }
