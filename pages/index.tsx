@@ -1,15 +1,10 @@
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
-import PreviewUrl from '@/components/PreviewUrl/PreviewUrl'
 import { encodeObject } from '@/lib'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Router from 'next/router'
-import { useState } from 'react'
-import { Fields } from '@/types'
 
 const Home: NextPage = () => {
-  const [fields, setFields] = useState<Fields[]>([])
-
   return (
     <>
       <Head>
@@ -25,22 +20,12 @@ const Home: NextPage = () => {
           <h2>Form</h2>
           <MockRequirementsForm
             onSubmit={({ fields }) => {
-              setFields(fields)
               Router.push({
                 pathname: '/preview',
                 query: { fields: encodeObject(fields) }
               })
             }}
           />
-        </div>
-        <div>
-          <h2>Preview</h2>
-          {!!fields?.length && (
-            <>
-              <PreviewUrl fields={fields} />
-              <code>{encodeObject(fields)}</code>
-            </>
-          )}
         </div>
       </div>
     </>
