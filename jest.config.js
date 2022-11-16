@@ -21,7 +21,7 @@ const customJestConfig = {
     '<rootDir>/dist'
   ],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1'
+    '^@/(.*)$': '<rootDir>/src/$1'
   },
   resolver: '<rootDir>/.jest/resolver.js',
   clearMocks: true
