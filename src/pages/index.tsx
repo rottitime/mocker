@@ -1,6 +1,8 @@
 import { MockRequirementsForm } from '@/components'
+import Layout from '@/components/Layout/Layout'
 import { encodeObject } from '@/lib'
 import Router from 'next/router'
+import { ReactElement } from 'react'
 
 const Home = () => {
   return (
@@ -25,3 +27,5 @@ const Home = () => {
 }
 
 export default Home
+
+Home.getLayout = (page: ReactElement) => <Layout>{page}</Layout>
