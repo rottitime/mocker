@@ -1,7 +1,13 @@
+import { cache } from '@emotion/css'
 import type { AppProps } from 'next/app'
+import { CacheProvider } from '@emotion/react'
+import GlobalStyles from '@/components/GlobalStyles'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <CacheProvider value={cache}>
+    <GlobalStyles />
+    <Component {...pageProps} />
+  </CacheProvider>
+)
 
 export default MyApp
