@@ -1,6 +1,4 @@
-'use client'
-import './global.css'
-import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
+import { MockRequirementsForm } from '@/components'
 import { encodeObject } from '@/lib'
 import Router from 'next/router'
 
