@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[554],{9554:function(e,n,r){r.r(n);var a=r(6421),c=r(5944);n.default=function(e){var n=e.fields,r="".concat(window.location.origin,"/api/mock?fields=").concat((0,a.Cx)(n));return(0,c.tZ)("a",{href:r,target:"_blank",rel:"noreferrer",children:r})}}}]);
