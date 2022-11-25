@@ -1,5 +1,4 @@
 'use client'
-
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
 import { encodeObject } from '@/lib'
 import Router from 'next/router'
