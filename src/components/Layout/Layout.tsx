@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
       <nav>{publicRuntimeConfig.siteTitle}</nav>
-      <main>{children}</main>
+      <main className="text-red-700">{children}</main>
     </div>
   )
 }
