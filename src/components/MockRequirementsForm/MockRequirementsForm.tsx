@@ -1,4 +1,4 @@
-import { FC, useId } from 'react'
+import { useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 import { Input } from '@/components'
@@ -10,7 +10,11 @@ const initialValues: FormValues = {
   fields: [{ field_name: '', field_type: '' }]
 }
 
-const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues = initialValues }) => {
+const MockRequirementsForm = ({
+  onFormSubmit,
+  defaultValues = initialValues,
+  ...props
+}: Props) => {
   const id = useId()
   const labels = {
     name: `name-label-${id}`,
@@ -30,7 +34,7 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues = initialValu
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onFormSubmit)} {...props}>
       {!!fields.length && (
         <table className="w-full">
           <thead>

@@ -1,4 +1,3 @@
-import MockRequirementsForm from './MockRequirementsForm/MockRequirementsForm'
-import Input from './Input'
-
-export { MockRequirementsForm, Input }
+export { default as MockRequirementsForm } from './MockRequirementsForm/MockRequirementsForm'
+export { default as Input } from './Input'
+export { default as BackgroundDots } from './BackgroundDots'

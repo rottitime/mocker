@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 body {
+  /* background-image: url(/img/background.jpg); */
   @apply bg-stone text-sky-300;
 }
 

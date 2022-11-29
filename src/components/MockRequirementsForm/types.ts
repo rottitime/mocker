@@ -1,4 +1,5 @@
 import { Fields } from '@/types'
+import { FormHTMLAttributes } from 'react'
 
 export type FormValues = {
   fields: Fields[]
@@ -6,5 +7,5 @@ export type FormValues = {
 
 export type Props = {
   defaultValues?: FormValues
-  onSubmit: (data: FormValues) => void
-}
+  onFormSubmit: (data: FormValues) => void
+} & FormHTMLAttributes<HTMLFormElement>
