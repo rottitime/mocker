@@ -4,6 +4,7 @@ import { Props, FormValues } from './types'
 import { Input } from '@/components'
 import Button from '../Button'
 import Select from '../Select'
+import { CrossCircle } from '../Icon'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const id = useId()
@@ -71,7 +72,7 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
                       remove(index)
                     }}
                   >
-                    remove
+                    <CrossCircle className="text-3xl" />
                   </button>
                 </td>
               </tr>
