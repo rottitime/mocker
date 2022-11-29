@@ -9,6 +9,7 @@ const Home = () => {
   return (
     <>
       <MockRequirementsForm
+        className="relative z-10"
         onFormSubmit={({ fields }) => {
           router.push(`/preview?fields=${encodeObject(fields)}`)
         }}
