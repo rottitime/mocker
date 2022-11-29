@@ -13,6 +13,9 @@ module.exports = {
       xl: '1440px'
     },
     extend: {
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops) 15%)'
+      },
       colors: {
         stone: '#1f1f26'
       },
