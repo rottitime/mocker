@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
+import { Input } from '@/components'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const {
@@ -28,14 +29,22 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
           {fields.map((field, index) => (
             <tr key={field.id}>
               <td>
-                <input
+                <Input
+                  label="Name"
+                  {...register(`fields.${index}.field_name`, {
+                    required: true,
+                    maxLength: 30
+                  })}
+                />
+
+                {/* <input
                   className="border-2 border-white/50 bg-transparent rounded px-3.5 text-3xl py-2	 text-white/50 bg-white/5"
                   type="text"
                   {...register(`fields.${index}.field_name`, {
                     required: true,
                     maxLength: 30
                   })}
-                />
+                /> */}
                 {errors.fields?.[index]?.field_name && <p>This is a required field</p>}
               </td>
 

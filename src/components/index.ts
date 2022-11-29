@@ -1,3 +1,4 @@
-import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
+import MockRequirementsForm from './MockRequirementsForm/MockRequirementsForm'
+import Input from './Input'
 
-export { MockRequirementsForm }
+export { MockRequirementsForm, Input }
