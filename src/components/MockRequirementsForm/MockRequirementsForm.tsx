@@ -4,9 +4,13 @@ import { Props, FormValues } from './types'
 import { Input } from '@/components'
 import Button from '../Button'
 import Select from '../Select'
-import { CrossCircle } from '../Icon'
+import { Add, CrossCircle } from '../Icon'
 
-const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
+const initialValues: FormValues = {
+  fields: [{ field_name: '', field_type: '' }]
+}
+
+const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues = initialValues }) => {
   const id = useId()
   const labels = {
     name: `name-label-${id}`,
@@ -28,12 +32,12 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {!!fields.length && (
-        <table>
+        <table className="w-full">
           <thead>
             <tr>
               <th id={labels.name}>Name</th>
               <th id={labels.type}>Type</th>
-              <th id={labels.menu}>Menu</th>
+              <th id={labels.menu}>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
@@ -66,8 +70,9 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
                     })}
                   />
                 </td>
-                <td>
+                <td className="text-right">
                   <button
+                    title="Remove"
                     onClick={() => {
                       remove(index)
                     }}
@@ -81,14 +86,17 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
         </table>
       )}
 
-      <Button
-        onClick={(e) => {
-          append({ field_name: '', field_type: '' })
-          e.preventDefault()
-        }}
-      >
-        Add another field
-      </Button>
+      <div className="text-right">
+        <Button
+          title="Add another row"
+          onClick={(e) => {
+            append({ field_name: '', field_type: '' })
+            e.preventDefault()
+          }}
+        >
+          <Add className="text-3xl" /> Add
+        </Button>
+      </div>
 
       <br />
       <Button disabled={!fields.length}>Submit</Button>
