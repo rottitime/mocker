@@ -6,7 +6,11 @@ import Button from '../Button'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const id = useId()
-  const labelId = `-label-${id}`
+  const labels = {
+    name: `name-label-${id}`,
+    type: `type-label-${id}`,
+    menu: `menu-label-${id}`
+  }
 
   const {
     control,
@@ -25,9 +29,9 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
         <table>
           <thead>
             <tr>
-              <th id={`name${labelId}`}>Name</th>
-              <th>Type</th>
-              <th>Menu</th>
+              <th id={labels.name}>Name</th>
+              <th id={labels.type}>Type</th>
+              <th id={labels.menu}>Menu</th>
             </tr>
           </thead>
           <tbody>
@@ -36,7 +40,7 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
                 <td>
                   <Input
                     aria-label="Name"
-                    aria-labelledby={`name${labelId}`}
+                    aria-labelledby={labels.name}
                     placeholder="e.g. first-name"
                     error={
                       errors.fields?.[index]?.field_name && 'This is a required field'
