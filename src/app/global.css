@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-stone;
+  @apply bg-stone text-sky-300;
 }
 
 input.keyup {
