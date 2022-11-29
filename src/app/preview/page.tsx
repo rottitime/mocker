@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/router'
+import { useRouter, useSearchParams } from 'next/navigation'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
 import { decodeObject, encodeObject } from '@/lib'
 import PreviewMock from '@/components/PreviewMock/PreviewMock'
@@ -12,8 +12,12 @@ const DynamicPreviewUrl = dynamic(() => import('@/components/PreviewUrl/PreviewU
 
 const PreviewPage = () => {
   const router = useRouter()
-  const query = router?.query
-  const fields = decodeObject(query?.fields?.toString() || '[]')
+  const searchParams = useSearchParams()
+
+  const fieldsParam = searchParams.get('fields')
+
+  // const query = router?.query
+  const fields = decodeObject(fieldsParam?.toString() || '[]')
 
   return (
     <>
@@ -25,10 +29,7 @@ const PreviewPage = () => {
             <MockRequirementsForm
               defaultValues={{ fields }}
               onSubmit={({ fields }) =>
-                router.replace({
-                  pathname: '/preview',
-                  query: { fields: encodeObject(fields) }
-                })
+                router.push(`/preview?fields=${encodeObject(fields)}`)
               }
             />
           )}
