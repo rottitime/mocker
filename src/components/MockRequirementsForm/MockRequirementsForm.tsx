@@ -2,6 +2,7 @@ import { FC } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 import { Input } from '@/components'
+import Button from '../Button'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const {
@@ -31,21 +32,13 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
               <td>
                 <Input
                   label="Name"
+                  placeholder="e.g. first-name"
+                  error={errors.fields?.[index]?.field_name && 'This is a required field'}
                   {...register(`fields.${index}.field_name`, {
                     required: true,
                     maxLength: 30
                   })}
                 />
-
-                {/* <input
-                  className="border-2 border-white/50 bg-transparent rounded px-3.5 text-3xl py-2	 text-white/50 bg-white/5"
-                  type="text"
-                  {...register(`fields.${index}.field_name`, {
-                    required: true,
-                    maxLength: 30
-                  })}
-                /> */}
-                {errors.fields?.[index]?.field_name && <p>This is a required field</p>}
               </td>
 
               <td>
@@ -76,17 +69,17 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
         </tbody>
       </table>
 
-      <button
+      <Button
         onClick={(e) => {
           append({ field_name: '', field_type: '' })
           e.preventDefault()
         }}
       >
         Add another field
-      </button>
-      <br />
+      </Button>
 
-      <button disabled={!fields.length}>Submit</button>
+      <br />
+      <Button disabled={!fields.length}>Submit</Button>
     </form>
   )
 }
