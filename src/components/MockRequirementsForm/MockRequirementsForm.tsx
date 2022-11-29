@@ -3,6 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 import { Input } from '@/components'
 import Button from '../Button'
+import Select from '../Select'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   const id = useId()
@@ -53,18 +54,16 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
                 </td>
 
                 <td>
-                  <select
+                  <Select
+                    options={options}
+                    error={
+                      errors.fields?.[index]?.field_type && 'This is a required field'
+                    }
                     {...register(`fields.${index}.field_type`, {
                       required: true,
                       maxLength: 30
                     })}
-                  >
-                    <option>Select</option>
-                    {options.map((value) => (
-                      <option key={value}>{value}</option>
-                    ))}
-                  </select>
-                  {errors.fields?.[index]?.field_type && <p>This is a required field</p>}
+                  />
                 </td>
                 <td>
                   <button
