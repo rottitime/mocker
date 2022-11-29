@@ -15,71 +15,70 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
   })
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Menu</th>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Menu</th>
+          </tr>
+        </thead>
+        <tbody>
+          {fields.map((field, index) => (
+            <tr key={field.id}>
+              <td>
+                <input
+                  className="border-2 border-white/50 bg-transparent rounded"
+                  type="text"
+                  {...register(`fields.${index}.field_name`, {
+                    required: true,
+                    maxLength: 30
+                  })}
+                />
+                {errors.fields?.[index]?.field_name && <p>This is a required field</p>}
+              </td>
+
+              <td>
+                <select
+                  {...register(`fields.${index}.field_type`, {
+                    required: true,
+                    maxLength: 30
+                  })}
+                >
+                  <option>Select</option>
+                  {options.map((value) => (
+                    <option key={value}>{value}</option>
+                  ))}
+                </select>
+                {errors.fields?.[index]?.field_type && <p>This is a required field</p>}
+              </td>
+              <td>
+                <button
+                  onClick={() => {
+                    remove(index)
+                  }}
+                >
+                  remove
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {fields.map((field, index) => (
-              <tr key={field.id}>
-                <td>
-                  <input
-                    type="text"
-                    {...register(`fields.${index}.field_name`, {
-                      required: true,
-                      maxLength: 30
-                    })}
-                  />
-                  {errors.fields?.[index]?.field_name && <p>This is a required field</p>}
-                </td>
+          ))}
+        </tbody>
+      </table>
 
-                <td>
-                  <select
-                    {...register(`fields.${index}.field_type`, {
-                      required: true,
-                      maxLength: 30
-                    })}
-                  >
-                    <option>Select</option>
-                    {options.map((value) => (
-                      <option key={value}>{value}</option>
-                    ))}
-                  </select>
-                  {errors.fields?.[index]?.field_type && <p>This is a required field</p>}
-                </td>
-                <td>
-                  <button
-                    onClick={() => {
-                      remove(index)
-                    }}
-                  >
-                    remove
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <button
+        onClick={(e) => {
+          append({ field_name: '', field_type: '' })
+          e.preventDefault()
+        }}
+      >
+        Add another field
+      </button>
+      <br />
 
-        <button
-          onClick={(e) => {
-            append({ field_name: '', field_type: '' })
-            e.preventDefault()
-          }}
-        >
-          Add another field
-        </button>
-        <br />
-
-        <button disabled={!fields.length}>Submit</button>
-      </form>
-    </>
+      <button disabled={!fields.length}>Submit</button>
+    </form>
   )
 }
 
