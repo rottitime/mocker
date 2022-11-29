@@ -1,10 +1,13 @@
-import { FC } from 'react'
+import { FC, useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 import { Input } from '@/components'
 import Button from '../Button'
 
 const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
+  const id = useId()
+  const labelId = `-label-${id}`
+
   const {
     control,
     register,
@@ -18,56 +21,61 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Menu</th>
-          </tr>
-        </thead>
-        <tbody>
-          {fields.map((field, index) => (
-            <tr key={field.id}>
-              <td>
-                <Input
-                  label="Name"
-                  placeholder="e.g. first-name"
-                  error={errors.fields?.[index]?.field_name && 'This is a required field'}
-                  {...register(`fields.${index}.field_name`, {
-                    required: true,
-                    maxLength: 30
-                  })}
-                />
-              </td>
-
-              <td>
-                <select
-                  {...register(`fields.${index}.field_type`, {
-                    required: true,
-                    maxLength: 30
-                  })}
-                >
-                  <option>Select</option>
-                  {options.map((value) => (
-                    <option key={value}>{value}</option>
-                  ))}
-                </select>
-                {errors.fields?.[index]?.field_type && <p>This is a required field</p>}
-              </td>
-              <td>
-                <button
-                  onClick={() => {
-                    remove(index)
-                  }}
-                >
-                  remove
-                </button>
-              </td>
+      {!!fields.length && (
+        <table>
+          <thead>
+            <tr>
+              <th id={`name${labelId}`}>Name</th>
+              <th>Type</th>
+              <th>Menu</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {fields.map((field, index) => (
+              <tr key={field.id}>
+                <td>
+                  <Input
+                    aria-label="Name"
+                    aria-labelledby={`name${labelId}`}
+                    placeholder="e.g. first-name"
+                    error={
+                      errors.fields?.[index]?.field_name && 'This is a required field'
+                    }
+                    {...register(`fields.${index}.field_name`, {
+                      required: true,
+                      maxLength: 30
+                    })}
+                  />
+                </td>
+
+                <td>
+                  <select
+                    {...register(`fields.${index}.field_type`, {
+                      required: true,
+                      maxLength: 30
+                    })}
+                  >
+                    <option>Select</option>
+                    {options.map((value) => (
+                      <option key={value}>{value}</option>
+                    ))}
+                  </select>
+                  {errors.fields?.[index]?.field_type && <p>This is a required field</p>}
+                </td>
+                <td>
+                  <button
+                    onClick={() => {
+                      remove(index)
+                    }}
+                  >
+                    remove
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
 
       <Button
         onClick={(e) => {
