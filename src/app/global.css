@@ -5,3 +5,7 @@
 a {
   @apply text-sky-300;
 }
+
+body {
+  @apply bg-stone;
+}
