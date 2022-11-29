@@ -29,7 +29,7 @@ const MockRequirementsForm: FC<Props> = ({ onSubmit, defaultValues }) => {
             <tr key={field.id}>
               <td>
                 <input
-                  className="border-2 border-white/50 bg-transparent rounded"
+                  className="border-2 border-white/50 bg-transparent rounded px-3.5 text-3xl py-2	 text-white/50 bg-white/5"
                   type="text"
                   {...register(`fields.${index}.field_name`, {
                     required: true,
