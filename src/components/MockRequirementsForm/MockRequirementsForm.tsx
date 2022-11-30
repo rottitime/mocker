@@ -5,6 +5,7 @@ import { Input } from '@/components'
 import Button from '../Button'
 import Select from '../Select'
 import { Add, CrossCircle } from '../Icon'
+import { useUiContext } from '@/context/UiContext'
 
 const initialValues: FormValues = {
   fields: [{ field_name: '', field_type: '' }]
@@ -15,6 +16,8 @@ const MockRequirementsForm = ({
   defaultValues = initialValues,
   ...props
 }: Props) => {
+  const { setTotalFields, setFocusField } = useUiContext()
+
   const id = useId()
   const labels = {
     name: `name-label-${id}`,
@@ -52,13 +55,18 @@ const MockRequirementsForm = ({
                     aria-label="Name"
                     aria-labelledby={labels.name}
                     placeholder="e.g. first-name"
+                    {...register(`fields.${index}.field_name`, {
+                      required: true,
+                      maxLength: 30,
+                      onBlur: () => {
+                        console.log('blurrring')
+                        setFocusField(undefined)
+                      }
+                    })}
+                    onFocus={() => setFocusField(index)}
                     error={
                       errors.fields?.[index]?.field_name && 'This is a required field'
                     }
-                    {...register(`fields.${index}.field_name`, {
-                      required: true,
-                      maxLength: 30
-                    })}
                   />
                 </td>
 
@@ -94,7 +102,7 @@ const MockRequirementsForm = ({
         <Button
           title="Add another row"
           onClick={(e) => {
-            append({ field_name: '', field_type: '' })
+            append({ field_name: '', field_type: '' }, { shouldFocus: false })
             e.preventDefault()
           }}
         >
