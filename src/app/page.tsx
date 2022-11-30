@@ -15,7 +15,7 @@ const Home = () => {
         }}
       />
       <BackgroundDots />
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
     </>
   )
 }
