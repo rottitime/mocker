@@ -16,7 +16,7 @@ const MockRequirementsForm = ({
   defaultValues = initialValues,
   ...props
 }: Props) => {
-  const { setTotalFields, setFocusField } = useUiContext()
+  const { focusField, setFocusField } = useUiContext()
 
   const id = useId()
   const labels = {
@@ -57,13 +57,13 @@ const MockRequirementsForm = ({
                     placeholder="e.g. first-name"
                     {...register(`fields.${index}.field_name`, {
                       required: true,
-                      maxLength: 30,
-                      onBlur: () => {
-                        console.log('blurrring')
-                        setFocusField(undefined)
-                      }
+                      maxLength: 30
                     })}
-                    onFocus={() => setFocusField(index)}
+                    onActive={(isActive) => {
+                      if (isActive) {
+                        setFocusField(index)
+                      } else if (focusField === index) setFocusField(undefined)
+                    }}
                     error={
                       errors.fields?.[index]?.field_name && 'This is a required field'
                     }

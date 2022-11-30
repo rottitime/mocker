@@ -1,31 +1,50 @@
-import { forwardRef, InputHTMLAttributes, useState } from 'react'
+import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react'
 
 type Props = {
   error?: string
+  onActive: (isActive: boolean) => void
 } & InputHTMLAttributes<HTMLInputElement>
 
-const Input = forwardRef<HTMLInputElement, Props>(({ error, ...props }, ref) => {
-  const [keyup, setKeyup] = useState(false)
+const Input = forwardRef<HTMLInputElement, Props>(
+  ({ error, onActive, ...props }, ref) => {
+    const [keyup, setKeyup] = useState(false)
+    const [hover, setHover] = useState(false)
+    const [focus, setFocus] = useState(false)
 
-  return (
-    <>
-      <input
-        ref={ref}
-        className={`w-full rounded border-2 border-white/50 bg-white/5 px-3.5 py-2 text-3xl text-white/50 outline-none transition-all duration-100 focus:border-white/75 focus:text-white/75 ${
-          keyup ? 'keyup' : ''
-        }	`}
-        onKeyPress={() => {
-          setKeyup(true)
-          setTimeout(function () {
-            setKeyup(false)
-          }, 100)
-        }}
-        {...props}
-      />
-      {!!error && <p>{error}</p>}
-    </>
-  )
-})
+    useEffect(() => {
+      onActive(hover || focus)
+      return () => {
+        onActive(false)
+      }
+    }, [focus, hover, onActive])
+
+    return (
+      <>
+        <input
+          {...props}
+          ref={ref}
+          className={`w-full rounded border-2 border-white/50 bg-white/5 px-3.5 py-2 text-3xl text-white/50 outline-none transition-all duration-100 focus:border-white/75 focus:text-white/75 ${
+            keyup ? 'keyup' : ''
+          }	`}
+          onKeyPress={() => {
+            setKeyup(true)
+            setTimeout(function () {
+              setKeyup(false)
+            }, 100)
+          }}
+          onBlur={(e) => {
+            setFocus(false)
+            if (typeof props.onBlur === 'function') props.onBlur(e)
+          }}
+          onFocus={() => setFocus(true)}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        />
+        {!!error && <p>{error}</p>}
+      </>
+    )
+  }
+)
 
 Input.displayName = 'Input'
 
