@@ -28,7 +28,7 @@ const PreviewPage = () => {
           {!!fields.length && (
             <MockRequirementsForm
               defaultValues={{ fields }}
-              onSubmit={({ fields }) =>
+              onFormSubmit={({ fields }) =>
                 router.push(`/preview?fields=${encodeObject(fields)}`)
               }
             />
