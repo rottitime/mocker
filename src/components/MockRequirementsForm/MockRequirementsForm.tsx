@@ -1,4 +1,4 @@
-import { useId } from 'react'
+import { useEffect, useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
 import { Input } from '@/components'
@@ -16,7 +16,7 @@ const MockRequirementsForm = ({
   defaultValues = initialValues,
   ...props
 }: Props) => {
-  const { focusField, setFocusField } = useUiContext()
+  const { focusField, setFocusField, setTotalFields } = useUiContext()
 
   const id = useId()
   const labels = {
@@ -35,6 +35,10 @@ const MockRequirementsForm = ({
     control,
     name: 'fields'
   })
+
+  useEffect(() => {
+    setTotalFields(fields.length)
+  }, [fields.length, setTotalFields])
 
   return (
     <form onSubmit={handleSubmit(onFormSubmit)} {...props}>
