@@ -15,7 +15,7 @@ const Home = () => {
           router.push(`/preview?fields=${encodeObject(fields)}`)
         }}
       />
-      <BackgroundDots />
+      {/* <BackgroundDots /> */}
       <BackgroundImage />
     </UiProvider>
   )
