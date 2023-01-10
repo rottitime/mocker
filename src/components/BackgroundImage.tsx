@@ -13,7 +13,7 @@ export default function BackgroundImage() {
   return (
     <div
       style={{ backgroundPositionY: percentage + '%' }}
-      className={`bg- absolute left-0 top-0 z-0  h-screen w-screen   bg-opacity-20 bg-[url('/img/background.jpg')] bg-[position:center_40%] transition-all delay-100 duration-700 ${hoverStyles}`}
+      className={`bg- absolute left-0 top-0 z-0  h-screen w-screen bg-[url('/img/background9.png')] bg-[position:center_40%] opacity-50  transition-all delay-100 duration-700 ${hoverStyles}`}
     ></div>
   )
 }
