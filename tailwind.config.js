@@ -11,11 +11,19 @@ module.exports = {
       desktop: '1248px'
     },
     extend: {
+      backgroundColor: {
+        skin: {
+          site: 'var(--color-site-background)'
+        }
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops) 15%)'
       },
       colors: {
         stone: '#1f1f26'
+      },
+      fontFamily: {
+        sans: ['var(--font-poppins)']
       },
       spacing: {
         128: '32rem',

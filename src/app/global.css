@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-site-background: #c3cbd5;
+  }
+}
+
 body {
-  @apply bg-stone text-sky-300;
+  @apply bg-skin-site text-sky-300;
 }
 
 input.keyup {
