@@ -9,13 +9,13 @@
 }
 
 body {
-  @apply bg-skin-site text-sky-300;
+  @apply bg-skin-site;
 }
 
 input.keyup {
-  color: white;
+  color: rgba(0, 0, 0, 0.3);
   border-color: white;
-  text-shadow: 0 0 0.125em white;
+  /* text-shadow: 0 0 0.125em white; */
   box-shadow: 0 0 0.25em white, inset 0 0 0.25em white;
 }
 
@@ -25,5 +25,5 @@ td {
 }
 
 th {
-  @apply text-left text-3xl;
+  @apply text-left;
 }
