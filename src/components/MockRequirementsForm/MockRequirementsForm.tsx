@@ -4,7 +4,7 @@ import { Props, FormValues } from './types'
 import { Input } from '@/components'
 import Button from '../Button'
 import Select from '../Select'
-import { Add, CrossCircle } from '../Icon'
+import { Add, CrossCircle, PlusSmall } from '../Icon'
 import { useUiContext } from '@/context/UiContext'
 
 const initialValues: FormValues = {
@@ -77,6 +77,7 @@ const MockRequirementsForm = ({
                 <td>
                   <Select
                     options={options}
+                    placeholder="Please select"
                     error={
                       errors.fields?.[index]?.field_type && 'This is a required field'
                     }
@@ -110,7 +111,7 @@ const MockRequirementsForm = ({
             e.preventDefault()
           }}
         >
-          <Add className="text-3xl" /> Add
+          <PlusSmall className="text-lg" /> Add
         </Button>
       </div>
 
