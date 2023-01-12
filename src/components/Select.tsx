@@ -23,7 +23,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(
         <select
           {...props}
           ref={ref}
-          className="w-full  rounded   bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100"
+          className="w-full rounded bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100"
         >
           {placeholder && (
             <option value="" disabled selected>
