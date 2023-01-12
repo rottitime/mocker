@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+'use client'
 import { createContext, FC, ReactNode, useContext, useState } from 'react'
 
 type Props = {

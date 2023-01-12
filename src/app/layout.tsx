@@ -1,5 +1,6 @@
 import './global.css'
 import localFont from '@next/font/local'
+import { UiProvider } from '@/context/UiContext'
 
 const poppins = localFont({
   src: [
@@ -37,7 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </header>
 
-        <main className="container mx-auto px-4">{children}</main>
+        <UiProvider>
+          <main className="container mx-auto px-4">{children}</main>
+        </UiProvider>
       </body>
     </html>
   )

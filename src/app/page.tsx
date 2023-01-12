@@ -2,14 +2,13 @@
 import Card from '@/components/Card'
 // import { BackgroundDots, BackgroundImage } from '@/components'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
-import { UiProvider } from '@/context/UiContext'
 import { encodeObject } from '@/lib'
 import { useRouter } from 'next/navigation'
 
 const Home = () => {
   const router = useRouter()
   return (
-    <UiProvider>
+    <>
       <Card>
         <MockRequirementsForm
           className="relative z-30"
@@ -20,7 +19,7 @@ const Home = () => {
       </Card>
       {/* <BackgroundDots /> */}
       {/* <BackgroundImage /> */}
-    </UiProvider>
+    </>
   )
 }
 
