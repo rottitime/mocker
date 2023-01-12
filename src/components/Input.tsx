@@ -1,4 +1,5 @@
 import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react'
+import FieldHelper from './FieldHelper'
 
 type Props = {
   error?: string
@@ -41,7 +42,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         />
-        {!!error && <p>{error}</p>}
+        {!!error && <FieldHelper type="error">{error}</FieldHelper>}
       </>
     )
   }

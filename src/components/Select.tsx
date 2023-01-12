@@ -1,4 +1,5 @@
 import { forwardRef, SelectHTMLAttributes } from 'react'
+import FieldHelper from './FieldHelper'
 
 type Options = {
   value?: string
@@ -36,7 +37,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(
             </option>
           ))}
         </select>
-        {!!error && <p>{error}</p>}
+        {!!error && <FieldHelper type="error">{error}</FieldHelper>}
       </div>
     )
   }
