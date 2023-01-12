@@ -27,6 +27,7 @@ const pacifico = localFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${pacifico.variable} font-sans`}>
+      <head />
       <body>
         <header className="text-black">
           <div className="container z-20 mx-auto flex h-20 py-3 px-4 ">

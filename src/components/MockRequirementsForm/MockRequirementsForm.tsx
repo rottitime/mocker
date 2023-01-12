@@ -4,7 +4,7 @@ import { Props, FormValues } from './types'
 import { Input } from '@/components'
 import Button from '../Button'
 import Select from '../Select'
-import { Add, CrossCircle, PlusSmall } from '../Icon'
+import { CrossCircle, PlusSmall } from '../Icon'
 import { useUiContext } from '@/context/UiContext'
 
 const initialValues: FormValues = {
