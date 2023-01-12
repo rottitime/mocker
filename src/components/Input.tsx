@@ -23,7 +23,8 @@ const Input = forwardRef<HTMLInputElement, Props>(
         <input
           {...props}
           ref={ref}
-          className={`font w-full  rounded   bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100  ${
+          autoFocus
+          className={` w-full  rounded   bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100  ${
             keyup ? 'keyup' : ''
           }	`}
           onKeyPress={() => {
