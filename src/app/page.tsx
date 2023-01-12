@@ -1,4 +1,5 @@
 'use client'
+import Card from '@/components/Card'
 // import { BackgroundDots, BackgroundImage } from '@/components'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
 import { UiProvider } from '@/context/UiContext'
@@ -9,12 +10,14 @@ const Home = () => {
   const router = useRouter()
   return (
     <UiProvider>
-      <MockRequirementsForm
-        className="relative z-30"
-        onFormSubmit={({ fields }) => {
-          router.push(`/preview?fields=${encodeObject(fields)}`)
-        }}
-      />
+      <Card>
+        <MockRequirementsForm
+          className="relative z-30"
+          onFormSubmit={({ fields }) => {
+            router.push(`/preview?fields=${encodeObject(fields)}`)
+          }}
+        />
+      </Card>
       {/* <BackgroundDots /> */}
       {/* <BackgroundImage /> */}
     </UiProvider>
