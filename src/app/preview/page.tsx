@@ -5,6 +5,7 @@ import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirem
 import { decodeObject, encodeObject } from '@/lib'
 import PreviewMock from '@/components/PreviewMock/PreviewMock'
 import dynamic from 'next/dynamic'
+import Card from '@/components/Card'
 
 const DynamicPreviewUrl = dynamic(() => import('@/components/PreviewUrl/PreviewUrl'), {
   ssr: false
@@ -20,31 +21,22 @@ const PreviewPage = () => {
   const fields = decodeObject(fieldsParam?.toString() || '[]')
 
   return (
-    <>
-      <h1>PreviewPage</h1>
-
-      <div style={{ display: 'flex', gap: 30 }}>
-        <div>
-          {!!fields.length && (
-            <MockRequirementsForm
-              defaultValues={{ fields }}
-              onFormSubmit={({ fields }) =>
-                router.push(`/preview?fields=${encodeObject(fields)}`)
-              }
-            />
-          )}
-        </div>
-        <div>
-          <h2>Preview</h2>
-          {<DynamicPreviewUrl fields={fields} />}
-          <hr />
-
-          {<PreviewMock data={fields} />}
-        </div>
-      </div>
-
-      <hr />
-    </>
+    <div className="flex gap-10 [&>div]:w-1/2">
+      <Card>
+        {!!fields.length && (
+          <MockRequirementsForm
+            defaultValues={{ fields }}
+            onFormSubmit={({ fields }) =>
+              router.push(`/preview?fields=${encodeObject(fields)}`)
+            }
+          />
+        )}
+      </Card>
+      <Card>
+        {<DynamicPreviewUrl fields={fields} />}
+        {<PreviewMock data={fields} />}
+      </Card>
+    </div>
   )
 }
 
