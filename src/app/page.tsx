@@ -1,5 +1,5 @@
 'use client'
-import { BackgroundDots, BackgroundImage } from '@/components'
+// import { BackgroundDots, BackgroundImage } from '@/components'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
 import { UiProvider } from '@/context/UiContext'
 import { encodeObject } from '@/lib'

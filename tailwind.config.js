@@ -23,7 +23,8 @@ module.exports = {
         stone: '#1f1f26'
       },
       fontFamily: {
-        sans: ['var(--font-poppins)']
+        sans: ['var(--font-poppins)'],
+        display: ['var(--font-pacifico)']
       },
       spacing: {
         128: '32rem',
