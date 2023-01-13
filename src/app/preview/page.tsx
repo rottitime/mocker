@@ -1,5 +1,5 @@
 import { useRouter, useSearchParams } from 'next/navigation'
-import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
+import MockRequirementsForm from '@/components/MockRequirementsForm'
 import { decodeObject, encodeObject } from '@/lib'
 // import PreviewMock from '@/components/PreviewMock/PreviewMock'
 import { Card } from '@/components'
