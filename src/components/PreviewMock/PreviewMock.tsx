@@ -6,14 +6,15 @@ import { CopyButton } from '@/components'
 
 const PreviewMock = ({ data }: Props) => {
   const text = JSON.stringify(fieldsToMockJson(data), null, 2)
+
   return (
     <div className="relative">
-      {/* <SyntaxHighlighter language="json" style={dracula} wrapLines>
+      <SyntaxHighlighter language="json" style={dracula} wrapLines>
         {text}
-      </SyntaxHighlighter> */}
-      {/* <div className='className="absolute top-2 right-2'>
+      </SyntaxHighlighter>
+      <div className="absolute top-2 right-2">
         <CopyButton text={text} />
-      </div> */}
+      </div>
     </div>
   )
 }

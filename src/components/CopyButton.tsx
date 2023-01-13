@@ -5,7 +5,7 @@ import { Copy } from '@/components/Icon'
 type Props = ComponentProps<typeof CopyToClipboard>
 
 function CopyButton({ onCopy, ...props }: Props) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState<boolean>(false)
 
   console.log({ copied })
 
@@ -13,14 +13,17 @@ function CopyButton({ onCopy, ...props }: Props) {
     <CopyToClipboard
       {...props}
       onCopy={(text, result) => {
-        console.log('clcked')
         setCopied(true)
+        setTimeout(() => setCopied(false), 500)
         if (typeof onCopy === 'function') onCopy(text, result)
       }}
     >
-      <button className="flex items-center gap-2 rounded border border-white bg-gray-600 p-1 text-sm text-white">
+      <button
+        className="flex items-center gap-2 rounded bg-white/20 p-1 text-sm text-white"
+        disabled={copied}
+      >
         <Copy />
-        {copied} {!!copied ? 'Copy' : 'Copied'}
+        {copied ? 'Copied' : 'Copy'}
       </button>
     </CopyToClipboard>
   )
