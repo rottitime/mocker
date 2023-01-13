@@ -21,7 +21,6 @@ const customJestConfig = {
     '<rootDir>/dist'
   ],
   moduleNameMapper: {
-    '\\.svg': '<rootDir>/__mocks__/svgrMock.js',
     '^@/(.*)$': '<rootDir>/src/$1'
   },
   resolver: '<rootDir>/.jest/resolver.js',
