@@ -1,9 +1,8 @@
+'use client'
 import { useEffect, useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Props, FormValues } from './types'
-import { Input } from '@/components'
-import Button from '../Button'
-import Select from '../Select'
+import { Input, Button, Select } from '@/components'
 import { CrossCircle, PlusSmall } from '../Icon'
 import { useUiContext } from '@/context/UiContext'
 
@@ -11,12 +10,13 @@ const initialValues: FormValues = {
   fields: [{ field_name: '', field_type: '' }]
 }
 
-const MockRequirementsForm = ({
-  onFormSubmit,
-  defaultValues = initialValues,
-  ...props
-}: Props) => {
-  const { focusField, setFocusField, setTotalFields } = useUiContext()
+const MockRequirementsForm = ({ onFormSubmit, ...props }: Props) => {
+  const {
+    focusField,
+    setFocusField,
+    setTotalFields,
+    fields: currentFields
+  } = useUiContext()
 
   const id = useId()
   const labels = {
@@ -27,14 +27,20 @@ const MockRequirementsForm = ({
 
   const {
     control,
+    reset,
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormValues>({ defaultValues })
+  } = useForm<FormValues>({ defaultValues: initialValues, mode: 'onChange' })
+
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
     name: 'fields'
   })
+
+  useEffect(() => {
+    if (currentFields?.length) reset({ fields: currentFields })
+  }, [reset, currentFields])
 
   useEffect(() => {
     setTotalFields(fields.length)

@@ -1,35 +1,31 @@
-'use client'
-
 import { useRouter, useSearchParams } from 'next/navigation'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
 import { decodeObject, encodeObject } from '@/lib'
-import PreviewMock from '@/components/PreviewMock/PreviewMock'
-import { Card, PreviewUrl } from '@/components'
+// import PreviewMock from '@/components/PreviewMock/PreviewMock'
+import { Card } from '@/components'
+import PreviewUrl from '@/components/PreviewUrl'
 
 const PreviewPage = () => {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-
-  const fieldsParam = searchParams.get('fields')
-
-  // const query = router?.query
-  const fields = decodeObject(fieldsParam?.toString() || '[]')
+  // const router = useRouter()
+  // const searchParams = useSearchParams()
+  // const fieldsParam = searchParams.get('fields')
+  // const fields = decodeObject(fieldsParam?.toString() || '[]')
 
   return (
     <div className="flex gap-10 [&>div]:w-1/2">
       <Card>
-        {!!fields.length && (
-          <MockRequirementsForm
-            defaultValues={{ fields }}
-            onFormSubmit={({ fields }) =>
-              router.push(`/preview?fields=${encodeObject(fields)}`)
-            }
-          />
-        )}
+        <MockRequirementsForm
+        // defaultValues={{ fields }}
+        // onFormSubmit={
+        //   ({ fields }) => console.log({ fields })
+        //   // router.push(`/preview?fields=${encodeObject(fields)}`)
+        // }
+        />
       </Card>
       <Card>
-        <PreviewUrl fields={fields} />
-        <PreviewMock data={fields} />
+        {/* {origin && url} */}
+        {/* <PreviewUrl fields={fields} /> */}
+        {/* <PreviewMock data={fields} /> */}
       </Card>
     </div>
   )

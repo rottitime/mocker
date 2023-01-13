@@ -1,3 +1,4 @@
+'use client'
 import { forwardRef, InputHTMLAttributes, useEffect, useState } from 'react'
 import FieldHelper from './FieldHelper'
 
