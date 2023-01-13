@@ -47,8 +47,9 @@ const MockRequirementsForm = () => {
   })
 
   useEffect(() => {
+    console.log({ currentFields })
     if (currentFields?.length) reset({ fields: currentFields })
-  }, [reset, currentFields])
+  }, [currentFields])
 
   useEffect(() => {
     setTotalFields(fields.length)

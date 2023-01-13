@@ -3,7 +3,7 @@
 import { decodeObject } from '@/lib'
 import { Fields } from '@/types'
 import { useSearchParams } from 'next/navigation'
-import { createContext, FC, ReactNode, useContext, useState } from 'react'
+import { createContext, FC, ReactNode, useContext, useMemo, useState } from 'react'
 
 type Props = {
   totalFields: number
@@ -20,7 +20,10 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [focusField, setFocusField] = useState<number>()
   const searchParams = useSearchParams()
   const fieldsParam = searchParams.get('fields')
-  const fields = fieldsParam ? decodeObject(fieldsParam?.toString() || '[]') : null
+
+  const fields = useMemo(() => {
+    return fieldsParam ? decodeObject(fieldsParam?.toString() || '[]') : null
+  }, [fieldsParam])
 
   const context: Props = {
     fields,

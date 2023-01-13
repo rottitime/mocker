@@ -12,7 +12,7 @@ const PreviewPage = () => {
   // const fields = decodeObject(fieldsParam?.toString() || '[]')
 
   return (
-    <div className="flex gap-10 [&>div]:w-1/2">
+    <div className="flex gap-10 [&>div]:w-1/2 [&>div]:grow">
       <Card>
         <MockRequirementsForm
         // defaultValues={{ fields }}
