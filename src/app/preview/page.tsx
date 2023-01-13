@@ -1,9 +1,4 @@
-// import { useRouter, useSearchParams } from 'next/navigation'
-import MockRequirementsForm from '@/components/MockRequirementsForm'
-// import { decodeObject, encodeObject } from '@/lib'
-// import PreviewMock from '@/components/PreviewMock/PreviewMock'
-import { Card } from '@/components'
-// import PreviewUrl from '@/components/PreviewUrl'
+import { MockRequirementsForm, Card, PreviewUrl, PreviewMock } from '@/components'
 
 const PreviewPage = () => {
   // const router = useRouter()
@@ -17,9 +12,8 @@ const PreviewPage = () => {
         <MockRequirementsForm />
       </Card>
       <Card>
-        {/* {origin && url} */}
-        {/* <PreviewUrl fields={fields} /> */}
-        {/* <PreviewMock data={fields} /> */}
+        <PreviewUrl />
+        <PreviewMock />
       </Card>
     </div>
   )

@@ -1,5 +1,6 @@
 export { default as MockRequirementsForm } from './MockRequirementsForm'
 export { default as PreviewUrl } from './PreviewUrl'
+export { default as PreviewMock } from './PreviewMock'
 export { default as Input } from './Input'
 export { default as BackgroundDots } from './BackgroundDots'
 export { default as BackgroundImage } from './BackgroundImage'
