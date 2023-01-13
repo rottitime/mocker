@@ -1,16 +1,24 @@
 'use client'
+import { useRouter } from 'next/navigation'
 import { useEffect, useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
-import { Props, FormValues } from './types'
 import { Input, Button, Select } from '@/components'
 import { CrossCircle, PlusSmall } from '../Icon'
 import { useUiContext } from '@/context/UiContext'
+import { encodeObject } from '@/lib'
+import { Fields } from '@/types'
+
+type FormValues = {
+  fields: Fields[]
+}
 
 const initialValues: FormValues = {
   fields: [{ field_name: '', field_type: '' }]
 }
 
-const MockRequirementsForm = ({ onFormSubmit, ...props }: Props) => {
+const MockRequirementsForm = () => {
+  const router = useRouter()
+
   const {
     focusField,
     setFocusField,
@@ -47,7 +55,11 @@ const MockRequirementsForm = ({ onFormSubmit, ...props }: Props) => {
   }, [fields.length, setTotalFields])
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} {...props}>
+    <form
+      onSubmit={handleSubmit(() => {
+        router.push(`/preview?fields=${encodeObject(fields)}`)
+      })}
+    >
       {!!fields.length && (
         <table className="w-full">
           <thead>
