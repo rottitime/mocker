@@ -1,29 +1,15 @@
-'use client'
-import './global.css'
-import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
-import { encodeObject } from '@/lib'
-import Router from 'next/router'
+import Card from '@/components/Card'
+import { MockRequirementsForm } from '@/components'
+// import { BackgroundDots, BackgroundImage } from '@/components'
 
-const Home = () => {
-  return (
-    <>
-      <h1>Mocker v1</h1>
-
-      <div style={{ display: 'flex', gap: 30 }}>
-        <div>
-          <h2>Form</h2>
-          <MockRequirementsForm
-            onSubmit={({ fields }) => {
-              Router.push({
-                pathname: '/preview',
-                query: { fields: encodeObject(fields) }
-              })
-            }}
-          />
-        </div>
-      </div>
-    </>
-  )
-}
+const Home = () => (
+  <>
+    <Card>
+      <MockRequirementsForm />
+    </Card>
+    {/* <BackgroundDots /> */}
+    {/* <BackgroundImage /> */}
+  </>
+)
 
 export default Home

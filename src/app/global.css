@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-site-background: #c3cbd5;
+  }
+}
+
+body {
+  @apply bg-skin-site;
+}
+
+input.keyup {
+  color: rgba(0, 0, 0, 0.3);
+  border-color: white;
+  /* text-shadow: 0 0 0.125em white; */
+  box-shadow: 0 0 0.25em white, inset 0 0 0.25em white;
+}
+
+th,
+td {
+  @apply p-3 align-top;
+}
+
+th {
+  @apply text-left;
+}
