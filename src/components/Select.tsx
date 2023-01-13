@@ -32,7 +32,7 @@ const Select = forwardRef<HTMLSelectElement, Props>(
             </option>
           )}
 
-          {filteredOptions.map(({ value, name }, i) => (
+          {filteredOptions.map(({ value, name }) => (
             <option value={value} key={value}>
               {name}
             </option>

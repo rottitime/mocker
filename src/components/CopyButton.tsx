@@ -7,8 +7,6 @@ type Props = ComponentProps<typeof CopyToClipboard>
 function CopyButton({ onCopy, ...props }: Props) {
   const [copied, setCopied] = useState<boolean>(false)
 
-  console.log({ copied })
-
   return (
     <CopyToClipboard
       {...props}
