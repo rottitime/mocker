@@ -10,12 +10,7 @@ const Home = () => {
   return (
     <>
       <Card>
-        <MockRequirementsForm
-          className="relative z-30"
-          onFormSubmit={({ fields }) => {
-            router.push(`/preview?fields=${encodeObject(fields)}`)
-          }}
-        />
+        <MockRequirementsForm />
       </Card>
       {/* <BackgroundDots /> */}
       {/* <BackgroundImage /> */}

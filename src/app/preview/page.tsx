@@ -1,9 +1,9 @@
-import { useRouter, useSearchParams } from 'next/navigation'
+// import { useRouter, useSearchParams } from 'next/navigation'
 import MockRequirementsForm from '@/components/MockRequirementsForm'
-import { decodeObject, encodeObject } from '@/lib'
+// import { decodeObject, encodeObject } from '@/lib'
 // import PreviewMock from '@/components/PreviewMock/PreviewMock'
 import { Card } from '@/components'
-import PreviewUrl from '@/components/PreviewUrl'
+// import PreviewUrl from '@/components/PreviewUrl'
 
 const PreviewPage = () => {
   // const router = useRouter()
@@ -14,13 +14,7 @@ const PreviewPage = () => {
   return (
     <div className="flex gap-10 [&>div]:w-1/2 [&>div]:grow">
       <Card>
-        <MockRequirementsForm
-        // defaultValues={{ fields }}
-        // onFormSubmit={
-        //   ({ fields }) => console.log({ fields })
-        //   // router.push(`/preview?fields=${encodeObject(fields)}`)
-        // }
-        />
+        <MockRequirementsForm />
       </Card>
       <Card>
         {/* {origin && url} */}
