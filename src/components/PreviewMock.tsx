@@ -1,6 +1,6 @@
 'use client'
 import SyntaxHighlighter from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
 import { fieldsToMockJson } from '@/lib/data-test'
 import { CopyButton } from '@/components'
 import { useUiContext } from '@/context/UiContext'

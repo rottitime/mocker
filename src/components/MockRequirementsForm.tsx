@@ -74,6 +74,7 @@ const MockRequirementsForm = () => {
               <tr key={field.id}>
                 <td>
                   <Input
+                    data-testid={`fields.${index}.field_name`}
                     aria-label="Name"
                     aria-labelledby={labels.name}
                     placeholder="e.g. first-name"
@@ -94,6 +95,7 @@ const MockRequirementsForm = () => {
 
                 <td>
                   <Select
+                    data-testid={`fields.${index}.field_type`}
                     options={options}
                     placeholder="Please select"
                     error={
@@ -125,8 +127,8 @@ const MockRequirementsForm = () => {
         <Button
           title="Add another row"
           onClick={(e) => {
-            append({ field_name: '', field_type: '' }, { shouldFocus: false })
             e.preventDefault()
+            append({ field_name: '', field_type: '' }, { shouldFocus: false })
           }}
         >
           <PlusSmall className="text-lg" /> Add
