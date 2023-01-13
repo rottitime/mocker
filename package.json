@@ -21,6 +21,7 @@
     "cors": "^2.8.5",
     "next": "^13.1.1",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.4",
     "react-syntax-highlighter": "^15.5.0"
