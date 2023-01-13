@@ -21,3 +21,9 @@ jest.mock('next/router', () => ({
   ...jest.requireActual('next/router'),
   useRouter: jest.fn(() => ({ locale: 'en', push: jest.fn(), replace: jest.fn() }))
 }))
+
+jest.mock('next/navigation', () => ({
+  ...jest.requireActual('next/navigation'),
+  useRouter: jest.fn(() => ({ locale: 'en', push: jest.fn(), replace: jest.fn() })),
+  useSearchParams: jest.fn(() => ({ get: jest.fn() }))
+}))
