@@ -4,12 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import MockRequirementsForm from '@/components/MockRequirementsForm/MockRequirementsForm'
 import { decodeObject, encodeObject } from '@/lib'
 import PreviewMock from '@/components/PreviewMock/PreviewMock'
-import dynamic from 'next/dynamic'
-import Card from '@/components/Card'
-
-const DynamicPreviewUrl = dynamic(() => import('@/components/PreviewUrl/PreviewUrl'), {
-  ssr: false
-})
+import { Card, PreviewUrl } from '@/components'
 
 const PreviewPage = () => {
   const router = useRouter()
@@ -33,8 +28,8 @@ const PreviewPage = () => {
         )}
       </Card>
       <Card>
-        {<DynamicPreviewUrl fields={fields} />}
-        {<PreviewMock data={fields} />}
+        <PreviewUrl fields={fields} />
+        <PreviewMock data={fields} />
       </Card>
     </div>
   )

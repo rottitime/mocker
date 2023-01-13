@@ -1,21 +1,20 @@
-import { FC } from 'react'
-import { Props } from './types'
-import { fieldsToMockJson } from '@/lib/data-test'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import CopyToClipboard from 'react-copy-to-clipboard'
+import { Props } from './types'
+import { fieldsToMockJson } from '@/lib/data-test'
+import { CopyButton } from '@/components'
 
-const PreviewMock: FC<Props> = ({ data }) => {
+const PreviewMock = ({ data }: Props) => {
   const text = JSON.stringify(fieldsToMockJson(data), null, 2)
   return (
-    <>
-      <SyntaxHighlighter language="json" style={dracula} wrapLines>
+    <div className="relative">
+      {/* <SyntaxHighlighter language="json" style={dracula} wrapLines>
         {text}
-      </SyntaxHighlighter>
-      <CopyToClipboard text={text} onCopy={() => alert('Copied')}>
-        <button>Copy</button>
-      </CopyToClipboard>
-    </>
+      </SyntaxHighlighter> */}
+      {/* <div className='className="absolute top-2 right-2'>
+        <CopyButton text={text} />
+      </div> */}
+    </div>
   )
 }
 

@@ -1,8 +1,7 @@
-import { FC } from 'react'
 import { Props } from './types'
 import { encodeObject } from '@/lib'
 
-const PreviewUrl: FC<Props> = ({ fields }) => {
+const PreviewUrl = ({ fields }: Props) => {
   const url = `${window.location.origin}/api/mock?fields=${encodeObject(fields)}`
 
   return (
