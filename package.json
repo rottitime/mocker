@@ -26,11 +26,6 @@
     "react-hook-form": "^7.39.4",
     "react-syntax-highlighter": "^15.5.0"
   },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.svg": "<rootDir>/__mocks__/svgrMock.js"
-    }
-  },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",
     "@testing-library/jest-dom": "^5.16.5",
