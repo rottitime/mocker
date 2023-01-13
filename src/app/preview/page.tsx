@@ -1,22 +1,19 @@
-import { MockRequirementsForm, Card, PreviewUrl, PreviewMock } from '@/components'
+import { MockRequirementsForm, Card } from '@/components'
+import dynamic from 'next/dynamic'
 
-const PreviewPage = () => {
-  // const router = useRouter()
-  // const searchParams = useSearchParams()
-  // const fieldsParam = searchParams.get('fields')
-  // const fields = decodeObject(fieldsParam?.toString() || '[]')
+const PreviewUrl = dynamic(() => import('@/components/PreviewUrl'), { ssr: false })
+const PreviewMock = dynamic(() => import('@/components/PreviewMock'), { ssr: false })
 
-  return (
-    <div className="flex gap-10 [&>div]:w-1/2 [&>div]:grow">
-      <Card>
-        <MockRequirementsForm />
-      </Card>
-      <Card>
-        <PreviewUrl />
-        <PreviewMock />
-      </Card>
-    </div>
-  )
-}
+const PreviewPage = () => (
+  <div className="flex gap-10 [&>div]:w-1/2 [&>div]:grow">
+    <Card>
+      <MockRequirementsForm />
+    </Card>
+    <Card>
+      <PreviewUrl />
+      <PreviewMock />
+    </Card>
+  </div>
+)
 
 export default PreviewPage
