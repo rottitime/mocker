@@ -6,9 +6,11 @@ const PreviewUrl: FC<Props> = ({ fields }) => {
   const url = `${window.location.origin}/api/mock?fields=${encodeObject(fields)}`
 
   return (
-    <a href={url} target="_blank" rel="noreferrer">
-      {url}
-    </a>
+    <div className="mb-4  overflow-x-scroll whitespace-nowrap rounded bg-gray-200 py-3">
+      <a href={url} target="_blank" rel="noreferrer">
+        {url}
+      </a>
+    </div>
   )
 }
 
