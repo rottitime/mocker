@@ -1,24 +1,57 @@
 import MockRequirementsForm from './MockRequirementsForm'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, screen, render } from '@/lib/test-utils'
-import { Add } from '@/components/Icon'
+import { renderWithProviders, screen, waitFor } from '@/lib/test-utils'
+
+const pushSpy = jest.fn()
+jest.mock('next/navigation', () => ({
+  ...jest.requireActual('next/navigation'),
+  useRouter: jest.fn(() => ({
+    locale: 'en',
+    push: pushSpy
+  })),
+  useSearchParams: jest.fn(() => ({ get: jest.fn(() => null) }))
+}))
 
 describe('MockRequirementsForm', () => {
   it('renders', async () => {
-    const view = renderWithProviders(<MockRequirementsForm />)
-
-    // const view = render(Add)
+    renderWithProviders(<MockRequirementsForm />)
 
     expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
     expect(screen.getByTestId('fields.0.field_type')).toBeVisible()
     expect(screen.getByTestId('remove-button')).toBeVisible()
     expect(screen.getByTestId('submit-button')).toBeVisible()
+    expect(screen.getByTestId('add-button')).toBeVisible()
 
     expect(screen.getByTestId('fields.0.field_name')).toHaveValue('')
     expect(screen.getByTestId('fields.0.field_type')).toHaveValue('')
 
     expect(screen.queryByTestId('fields.1.field_name')).not.toBeInTheDocument()
     expect(screen.queryByTestId('fields.1.field_type')).not.toBeInTheDocument()
+  })
+
+  describe('Submits', () => {
+    it('with added rows', async () => {
+      renderWithProviders(<MockRequirementsForm />)
+
+      await userEvent.type(screen.getByTestId('fields.0.field_name'), 'first_name')
+      await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'email')
+
+      await userEvent.click(screen.getByTestId('add-button'))
+
+      expect(screen.getByTestId('fields.1.field_name')).toBeVisible()
+      expect(screen.getByTestId('fields.1.field_type')).toBeVisible()
+
+      await userEvent.type(screen.getByTestId('fields.1.field_name'), 'id_key')
+      await userEvent.selectOptions(screen.getByTestId('fields.1.field_type'), 'id')
+
+      await userEvent.click(screen.getByTestId('submit-button'))
+
+      await waitFor(async () =>
+        expect(pushSpy).toHaveBeenCalledWith(
+          '/preview?fields=%5B%7B%22field_name%22%3A%22first_name%22%2C%22field_type%22%3A%22email%22%7D%2C%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D'
+        )
+      )
+    })
   })
 
   // describe('Sucessful data', () => {

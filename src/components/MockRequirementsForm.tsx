@@ -56,9 +56,9 @@ const MockRequirementsForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(() => {
+      onSubmit={handleSubmit(({ fields }) =>
         router.push(`/preview?fields=${encodeObject(fields)}`)
-      })}
+      )}
     >
       {!!fields.length && (
         <table className="w-full">
@@ -124,6 +124,7 @@ const MockRequirementsForm = () => {
 
       <div className="text-right">
         <Button
+          data-testid="add-button"
           title="Add another row"
           onClick={(e) => {
             e.preventDefault()
