@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Input, Button, Select } from '@/components'
-import { CrossCircle, PlusSmall } from './Icon'
+import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
 import { encodeObject } from '@/lib'
 import { Fields } from '@/types'
@@ -56,9 +56,9 @@ const MockRequirementsForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(() => {
+      onSubmit={handleSubmit(({ fields }) =>
         router.push(`/preview?fields=${encodeObject(fields)}`)
-      })}
+      )}
     >
       {!!fields.length && (
         <table className="w-full">
@@ -74,6 +74,7 @@ const MockRequirementsForm = () => {
               <tr key={field.id}>
                 <td>
                   <Input
+                    data-testid={`fields.${index}.field_name`}
                     aria-label="Name"
                     aria-labelledby={labels.name}
                     placeholder="e.g. first-name"
@@ -94,6 +95,7 @@ const MockRequirementsForm = () => {
 
                 <td>
                   <Select
+                    data-testid={`fields.${index}.field_type`}
                     options={options}
                     placeholder="Please select"
                     error={
@@ -107,10 +109,11 @@ const MockRequirementsForm = () => {
                 </td>
                 <td className="text-right">
                   <button
+                    className="disabled:opacity-30"
+                    disabled={fields.length < 2}
+                    data-testid={`remove-button-${index}`}
                     title="Remove"
-                    onClick={() => {
-                      remove(index)
-                    }}
+                    onClick={() => remove(index)}
                   >
                     <CrossCircle className="text-3xl" />
                   </button>
@@ -123,10 +126,11 @@ const MockRequirementsForm = () => {
 
       <div className="text-right">
         <Button
+          data-testid="add-button"
           title="Add another row"
           onClick={(e) => {
-            append({ field_name: '', field_type: '' }, { shouldFocus: false })
             e.preventDefault()
+            append({ field_name: '', field_type: '' }, { shouldFocus: false })
           }}
         >
           <PlusSmall className="text-lg" /> Add
@@ -134,7 +138,9 @@ const MockRequirementsForm = () => {
       </div>
 
       <br />
-      <Button disabled={!fields.length}>Submit</Button>
+      <Button disabled={!fields.length} data-testid="submit-button">
+        Submit
+      </Button>
     </form>
   )
 }
