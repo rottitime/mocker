@@ -59,6 +59,40 @@ describe('MockRequirementsForm', () => {
     )
   })
 
+  it('first delete button is disabled', async () => {
+    renderWithProviders(<MockRequirementsForm />)
+    expect(screen.getByTestId('remove-button-0')).toBeDisabled()
+    await userEvent.click(screen.getByTestId('add-button'))
+    expect(screen.getByTestId('remove-button-0')).toBeEnabled()
+  })
+
+  it('deletes correct row', async () => {
+    const initialData = [
+      { field_name: 'my_field1', field_type: 'id' },
+      { field_name: 'my_field2', field_type: 'first name' },
+      { field_name: 'my_field3', field_type: 'email' }
+    ]
+    getSpy.mockImplementationOnce(() => JSON.stringify(initialData))
+    renderWithProviders(<MockRequirementsForm />)
+
+    await userEvent.click(screen.getByTestId('remove-button-1'))
+
+    expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
+    expect(screen.getByTestId('fields.0.field_type')).toBeVisible()
+    expect(screen.getByTestId('fields.1.field_name')).toBeVisible()
+    expect(screen.getByTestId('fields.1.field_type')).toBeVisible()
+
+    expect(screen.getByTestId('fields.0.field_name')).toHaveValue(
+      initialData[0].field_name
+    )
+    expect(screen.getByTestId('fields.1.field_name')).toHaveValue(
+      initialData[2].field_name
+    )
+
+    expect(screen.queryByTestId('fields.2.field_name')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('fields.2.field_type')).not.toBeInTheDocument()
+  })
+
   describe('Submits', () => {
     it('with added rows', async () => {
       renderWithProviders(<MockRequirementsForm />)
@@ -82,12 +116,5 @@ describe('MockRequirementsForm', () => {
         )
       )
     })
-  })
-
-  it('first delete button is disabled', async () => {
-    renderWithProviders(<MockRequirementsForm />)
-    expect(screen.getByTestId('remove-button-0')).toBeDisabled()
-    await userEvent.click(screen.getByTestId('add-button'))
-    expect(screen.getByTestId('remove-button-0')).toBeEnabled()
   })
 })
