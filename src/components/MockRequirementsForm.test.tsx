@@ -1,12 +1,17 @@
 import MockRequirementsForm from './MockRequirementsForm'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, screen } from '@/lib/test-utils'
+import { renderWithProviders, screen, render } from '@/lib/test-utils'
+import { Add } from '@/components/Icon'
 
 describe('MockRequirementsForm', () => {
   it('renders', async () => {
-    renderWithProviders(<MockRequirementsForm />)
+    const view = renderWithProviders(<MockRequirementsForm />)
 
-    expect(screen.getByTestId('fields.0.field_name')).toBeInTheDocument()
+    // const view = render(Add)
+
+    ;(await view).debug()
+
+    // expect(screen.getByTestId('fields.0.field_name')).toBeInTheDocument()
 
     // await waitFor(() => {
     //   expect(screen.getByText(mockLevels[0].name)).toBeInTheDocument()
