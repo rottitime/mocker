@@ -109,7 +109,9 @@ const MockRequirementsForm = () => {
                 </td>
                 <td className="text-right">
                   <button
-                    data-testid="remove-button"
+                    className="disabled:opacity-30"
+                    disabled={fields.length < 2}
+                    data-testid={`remove-button-${index}`}
                     title="Remove"
                     onClick={() => remove(index)}
                   >

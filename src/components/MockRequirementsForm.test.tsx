@@ -20,7 +20,7 @@ describe('MockRequirementsForm', () => {
 
     expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
     expect(screen.getByTestId('fields.0.field_type')).toBeVisible()
-    expect(screen.getByTestId('remove-button')).toBeVisible()
+    expect(screen.getByTestId('remove-button-0')).toBeVisible()
     expect(screen.getByTestId('submit-button')).toBeVisible()
     expect(screen.getByTestId('add-button')).toBeVisible()
 
@@ -82,5 +82,12 @@ describe('MockRequirementsForm', () => {
         )
       )
     })
+  })
+
+  it('first delete button is disabled', async () => {
+    renderWithProviders(<MockRequirementsForm />)
+    expect(screen.getByTestId('remove-button-0')).toBeDisabled()
+    await userEvent.click(screen.getByTestId('add-button'))
+    expect(screen.getByTestId('remove-button-0')).toBeEnabled()
   })
 })
