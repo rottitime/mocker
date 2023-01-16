@@ -4,7 +4,7 @@ import { renderWithProviders, screen, waitFor } from '@/lib/test-utils'
 import { Fields } from '@/types'
 
 const pushSpy = jest.fn()
-const getSpy = jest.fn(() => null)
+const getSpy = jest.fn<string, Fields[]>(() => '[]')
 jest.mock('next/navigation', () => ({
   ...jest.requireActual('next/navigation'),
   useRouter: jest.fn(() => ({

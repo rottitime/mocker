@@ -20,7 +20,7 @@ jest.mock('next/config', () => () => ({
 jest.mock('next/navigation', () => ({
   ...jest.requireActual('next/navigation'),
   useRouter: jest.fn(() => ({ locale: 'en', push: jest.fn(), replace: jest.fn() })),
-  useSearchParams: jest.fn(() => ({ get: jest.fn(() => []) }))
+  useSearchParams: jest.fn(() => ({ get: jest.fn(() => '[]') }))
 }))
 
 jest.mock('@/components/Icon', () => ({
