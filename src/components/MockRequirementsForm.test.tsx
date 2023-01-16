@@ -9,20 +9,16 @@ describe('MockRequirementsForm', () => {
 
     // const view = render(Add)
 
-    ;(await view).debug()
+    expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
+    expect(screen.getByTestId('fields.0.field_type')).toBeVisible()
+    expect(screen.getByTestId('remove-button')).toBeVisible()
+    expect(screen.getByTestId('submit-button')).toBeVisible()
 
-    // expect(screen.getByTestId('fields.0.field_name')).toBeInTheDocument()
+    expect(screen.getByTestId('fields.0.field_name')).toHaveValue('')
+    expect(screen.getByTestId('fields.0.field_type')).toHaveValue('')
 
-    // await waitFor(() => {
-    //   expect(screen.getByText(mockLevels[0].name)).toBeInTheDocument()
-    // })
-    // expect(screen.getByText(mockLevels[1].name)).toBeInTheDocument()
-    // expect(screen.getByText(mockLevels[2].name)).toBeInTheDocument()
-    // expect(screen.getByText(mockLevels[3].name)).toBeInTheDocument()
-    // expect(screen.getByText(mockLevels[4].name)).toBeInTheDocument()
-    // expect(screen.getByText(mockSuggested[0])).toBeInTheDocument()
-    // expect(screen.getByText(mockSuggested[1])).toBeInTheDocument()
-    // expect(screen.getByText(mockSuggested[2])).toBeInTheDocument()
+    expect(screen.queryByTestId('fields.1.field_name')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('fields.1.field_type')).not.toBeInTheDocument()
   })
 
   // describe('Sucessful data', () => {

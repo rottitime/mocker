@@ -109,10 +109,9 @@ const MockRequirementsForm = () => {
                 </td>
                 <td className="text-right">
                   <button
+                    data-testid="remove-button"
                     title="Remove"
-                    onClick={() => {
-                      remove(index)
-                    }}
+                    onClick={() => remove(index)}
                   >
                     <CrossCircle className="text-3xl" />
                   </button>
@@ -136,7 +135,9 @@ const MockRequirementsForm = () => {
       </div>
 
       <br />
-      <Button disabled={!fields.length}>Submit</Button>
+      <Button disabled={!fields.length} data-testid="submit-button">
+        Submit
+      </Button>
     </form>
   )
 }
