@@ -14,7 +14,9 @@ global.TextEncoder = TextEncoder
 require('jest-fetch-mock').enableMocks()
 
 jest.mock('next/config', () => () => ({
-  publicRuntimeConfig: {}
+  publicRuntimeConfig: {
+    siteTitle: 'My website'
+  }
 }))
 
 jest.mock('next/navigation', () => ({
@@ -29,3 +31,5 @@ jest.mock('@/components/Icon', () => ({
   PlusSmall: 'PlusSmallIcon',
   Add: 'AddIcon'
 }))
+
+JSON.stringify
