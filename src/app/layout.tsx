@@ -29,7 +29,13 @@ const pacifico = localFont({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${pacifico.variable} font-sans`}>
-      <head />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="description"
+          content="Create and test your application's API calls with our user-friendly web app. Easily mock API responses and improve the performance of your app."
+        />
+      </head>
       <body>
         <Header />
 
