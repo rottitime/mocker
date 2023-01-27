@@ -1,6 +1,7 @@
 import './global.css'
 import localFont from '@next/font/local'
 import { UiProvider } from '@/context/UiContext'
+import { Header } from '@/components'
 
 const poppins = localFont({
   src: [
@@ -30,13 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${poppins.variable} ${pacifico.variable} font-sans`}>
       <head />
       <body>
-        <header className="text-black">
-          <div className="container z-20 mx-auto flex h-20 py-3 px-4 ">
-            <a href="/" className="relative items-center">
-              <h1 className="font-display text-3xl font-bold">Mocker</h1>
-            </a>
-          </div>
-        </header>
+        <Header />
 
         <UiProvider>
           <main className="container mx-auto px-4">{children}</main>
