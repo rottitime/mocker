@@ -1,3 +1,3 @@
-export default async function Head() {
-  return <title>Preview</title>
+export default function Head() {
+  return <title>Preview - API Mock</title>
 }
