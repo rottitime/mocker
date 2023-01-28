@@ -2,6 +2,7 @@ import './global.css'
 import localFont from '@next/font/local'
 import { UiProvider } from '@/context/UiContext'
 import { Header } from '@/components'
+import Analytics from '@/components/Analytics'
 
 const poppins = localFont({
   src: [
@@ -42,6 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <UiProvider>
           <main className="container mx-auto px-4">{children}</main>
         </UiProvider>
+        <Analytics />
       </body>
     </html>
   )
