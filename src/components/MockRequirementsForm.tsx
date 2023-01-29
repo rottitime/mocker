@@ -10,10 +10,14 @@ import { Fields } from '@/types'
 
 type FormValues = {
   fields: Fields[]
+  rows: number
+  single: boolean
 }
 
 const initialValues: FormValues = {
-  fields: [{ field_name: '', field_type: '' }]
+  fields: [{ field_name: '', field_type: '' }],
+  rows: 10,
+  single: false
 }
 
 const MockRequirementsForm = () => {
