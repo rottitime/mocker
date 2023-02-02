@@ -5,7 +5,7 @@ type Props = {
   onChange: ChangeEventHandler<HTMLInputElement>
 }
 
-function Quantity({ ...props }: Props) {
+function Quantity(props: Props) {
   const id = useId()
   const checkboxId = `single_${id}`
 
