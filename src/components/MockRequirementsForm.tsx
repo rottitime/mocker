@@ -2,7 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { useEffect, useId } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
-import { Input, Button, Select } from '@/components'
+import { Input, Button, Select, Quantity } from '@/components'
 import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
 import { encodeObject } from '@/lib'
@@ -140,6 +140,8 @@ const MockRequirementsForm = () => {
           <PlusSmall className="text-lg" /> Add
         </Button>
       </div>
+
+      <Quantity />
 
       <br />
       <Button disabled={!fields.length} data-testid="submit-button">
