@@ -1,24 +1,21 @@
 import Quantity from './Quantity'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, screen, waitFor } from '@/lib/test-utils'
-import { Fields } from '@/types'
-
-const pushSpy = jest.fn()
-const getSpy = jest.fn<string, Fields[]>(() => '[]')
-jest.mock('next/navigation', () => ({
-  ...jest.requireActual('next/navigation'),
-  useRouter: jest.fn(() => ({
-    locale: 'en',
-    push: pushSpy
-  })),
-  useSearchParams: jest.fn(() => ({ get: getSpy }))
-}))
+import { renderWithProviders, screen } from '@/lib/test-utils'
 
 describe('Quantity', () => {
   it('renders', async () => {
     renderWithProviders(<Quantity />)
 
     expect(screen.getByTestId('input-single')).toBeInTheDocument()
+    expect(screen.getByTestId('input-quantity')).toBeInTheDocument()
+    expect(screen.getByTestId('input-quantity')).toBeEnabled()
+  })
+
+  it('clicking checkbox', async () => {
+    renderWithProviders(<Quantity />)
+
+    await userEvent.click(screen.getByTestId('input-single'))
+    expect(screen.getByTestId('input-quantity')).toBeDisabled()
   })
 
   // it('prepopulated by query params', async () => {
