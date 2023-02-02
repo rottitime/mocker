@@ -1,8 +1,11 @@
 'use client'
+import { ChangeEventHandler, useId, useState } from 'react'
 
-import { useId, useState } from 'react'
+type Props = {
+  onChange: ChangeEventHandler<HTMLInputElement>
+}
 
-function Quantity() {
+function Quantity({ ...props }: Props) {
   const id = useId()
   const checkboxId = `single_${id}`
 
@@ -20,7 +23,7 @@ function Quantity() {
         }}
       />
 
-      <input type="number" disabled={checked} data-testid="input-quantity" />
+      <input type="number" disabled={checked} data-testid="input-quantity" {...props} />
     </>
   )
 }

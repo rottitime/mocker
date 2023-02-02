@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useId } from 'react'
-import { useFieldArray, useForm } from 'react-hook-form'
+import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { Input, Button, Select, Quantity } from '@/components'
 import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
@@ -42,7 +42,8 @@ const MockRequirementsForm = () => {
     reset,
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    watch
   } = useForm<FormValues>({ defaultValues: initialValues, mode: 'onChange' })
 
   const { fields, append, remove } = useFieldArray<FormValues>({
@@ -57,6 +58,8 @@ const MockRequirementsForm = () => {
   useEffect(() => {
     setTotalFields(fields.length)
   }, [fields.length, setTotalFields])
+
+  console.log({ watch: watch('rows') })
 
   return (
     <form
@@ -141,7 +144,15 @@ const MockRequirementsForm = () => {
         </Button>
       </div>
 
-      <Quantity />
+      <Controller
+        control={control}
+        name="rows"
+        render={({
+          field
+          // fieldState: { invalid, isTouched, isDirty, error },
+          // formState
+        }) => <Quantity {...field} />}
+      />
 
       <br />
       <Button disabled={!fields.length} data-testid="submit-button">
