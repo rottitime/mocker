@@ -4,118 +4,34 @@ import { renderWithProviders, screen } from '@/lib/test-utils'
 
 describe('Quantity', () => {
   it('renders', async () => {
-    renderWithProviders(<Quantity onChange={jest.fn()} />)
+    renderWithProviders(<Quantity defaultValue={8} onChange={jest.fn()} />)
 
     expect(screen.getByTestId('input-single')).toBeInTheDocument()
     expect(screen.getByTestId('input-quantity')).toBeInTheDocument()
     expect(screen.getByTestId('input-quantity')).toBeEnabled()
+    expect(screen.getByTestId('input-quantity')).toHaveValue(8)
   })
 
   it('clicking checkbox', async () => {
-    renderWithProviders(<Quantity onChange={jest.fn()} />)
+    const mockChanged = jest.fn()
+    renderWithProviders(<Quantity defaultValue={9} onChange={mockChanged} />)
 
     await userEvent.click(screen.getByTestId('input-single'))
     expect(screen.getByTestId('input-quantity')).toBeDisabled()
+    expect(mockChanged).toHaveBeenLastCalledWith(0)
+    await userEvent.click(screen.getByTestId('input-single'))
+    expect(screen.getByTestId('input-quantity')).toBeEnabled()
+    expect(mockChanged).toHaveBeenLastCalledWith(9)
   })
 
   it('quantity change', async () => {
     const mockChanged = jest.fn()
-
-    renderWithProviders(
-      <Quantity onChange={(data) => mockChanged(data?.currentTarget.value)} />
-    )
+    renderWithProviders(<Quantity onChange={mockChanged} />)
 
     const fieldQuantity = screen.getByTestId('input-quantity')
-    // const fieldSingle = screen.getByTestId('input-single')
-
     await userEvent.type(fieldQuantity, '2389')
-    expect(mockChanged).toHaveBeenLastCalledWith('2389')
+
+    expect(mockChanged).toBeCalledTimes(4)
+    expect(mockChanged).toHaveBeenLastCalledWith(2389)
   })
-
-  // it('prepopulated by query params', async () => {
-  //   const initialData = [
-  //     { field_name: 'my_field1', field_type: 'id' },
-  //     { field_name: 'my_field2', field_type: 'first name' }
-  //   ]
-  //   getSpy.mockImplementationOnce(() => JSON.stringify(initialData))
-  //   renderWithProviders(<Quantity />)
-
-  //   expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
-  //   expect(screen.getByTestId('fields.0.field_type')).toBeVisible()
-  //   expect(screen.getByTestId('fields.1.field_name')).toBeVisible()
-  //   expect(screen.getByTestId('fields.1.field_type')).toBeVisible()
-
-  //   expect(screen.getByTestId('fields.0.field_name')).toHaveValue(
-  //     initialData[0].field_name
-  //   )
-  //   expect(screen.getByTestId('fields.0.field_type')).toHaveValue(
-  //     initialData[0].field_type
-  //   )
-
-  //   expect(screen.getByTestId('fields.1.field_name')).toHaveValue(
-  //     initialData[1].field_name
-  //   )
-  //   expect(screen.getByTestId('fields.1.field_type')).toHaveValue(
-  //     initialData[1].field_type
-  //   )
-  // })
-
-  // it('first delete button is disabled', async () => {
-  //   renderWithProviders(<Quantity />)
-  //   expect(screen.getByTestId('remove-button-0')).toBeDisabled()
-  //   await userEvent.click(screen.getByTestId('add-button'))
-  //   expect(screen.getByTestId('remove-button-0')).toBeEnabled()
-  // })
-
-  // it('deletes correct row', async () => {
-  //   const initialData = [
-  //     { field_name: 'my_field1', field_type: 'id' },
-  //     { field_name: 'my_field2', field_type: 'first name' },
-  //     { field_name: 'my_field3', field_type: 'email' }
-  //   ]
-  //   getSpy.mockImplementationOnce(() => JSON.stringify(initialData))
-  //   renderWithProviders(<Quantity />)
-
-  //   await userEvent.click(screen.getByTestId('remove-button-1'))
-
-  //   expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
-  //   expect(screen.getByTestId('fields.0.field_type')).toBeVisible()
-  //   expect(screen.getByTestId('fields.1.field_name')).toBeVisible()
-  //   expect(screen.getByTestId('fields.1.field_type')).toBeVisible()
-
-  //   expect(screen.getByTestId('fields.0.field_name')).toHaveValue(
-  //     initialData[0].field_name
-  //   )
-  //   expect(screen.getByTestId('fields.1.field_name')).toHaveValue(
-  //     initialData[2].field_name
-  //   )
-
-  //   expect(screen.queryByTestId('fields.2.field_name')).not.toBeInTheDocument()
-  //   expect(screen.queryByTestId('fields.2.field_type')).not.toBeInTheDocument()
-  // })
-
-  // describe('Submits', () => {
-  //   it('with added rows', async () => {
-  //     renderWithProviders(<Quantity />)
-
-  //     await userEvent.type(screen.getByTestId('fields.0.field_name'), 'first_name')
-  //     await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'email')
-
-  //     await userEvent.click(screen.getByTestId('add-button'))
-
-  //     expect(screen.getByTestId('fields.1.field_name')).toBeVisible()
-  //     expect(screen.getByTestId('fields.1.field_type')).toBeVisible()
-
-  //     await userEvent.type(screen.getByTestId('fields.1.field_name'), 'id_key')
-  //     await userEvent.selectOptions(screen.getByTestId('fields.1.field_type'), 'id')
-
-  //     await userEvent.click(screen.getByTestId('submit-button'))
-
-  //     await waitFor(async () =>
-  //       expect(pushSpy).toHaveBeenCalledWith(
-  //         '/preview?fields=%5B%7B%22field_name%22%3A%22first_name%22%2C%22field_type%22%3A%22email%22%7D%2C%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D'
-  //       )
-  //     )
-  //   })
-  // })
 })

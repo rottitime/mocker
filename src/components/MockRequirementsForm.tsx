@@ -42,8 +42,7 @@ const MockRequirementsForm = () => {
     reset,
     register,
     handleSubmit,
-    formState: { errors },
-    watch
+    formState: { errors }
   } = useForm<FormValues>({ defaultValues: initialValues, mode: 'onChange' })
 
   const { fields, append, remove } = useFieldArray<FormValues>({
@@ -58,8 +57,6 @@ const MockRequirementsForm = () => {
   useEffect(() => {
     setTotalFields(fields.length)
   }, [fields.length, setTotalFields])
-
-  console.log({ watch: watch('rows') })
 
   return (
     <form
