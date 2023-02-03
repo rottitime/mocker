@@ -147,18 +147,11 @@ const MockRequirementsForm = () => {
       <Controller
         control={control}
         name="rows"
-        render={({
-          field: { onChange, value },
-          formState: { defaultValues }
-          // fieldState: { invalid, isTouched, isDirty, error },
-          // formState
-        }) => {
-          console.log({ defaultValues })
-          return <Quantity value={value} onChange={(e) => onChange(e)} />
-        }}
+        render={({ field: { onChange }, formState: { defaultValues } }) => (
+          <Quantity defaultValue={defaultValues?.rows} onChange={onChange} />
+        )}
       />
 
-      <br />
       <Button disabled={!fields.length} data-testid="submit-button">
         Submit
       </Button>

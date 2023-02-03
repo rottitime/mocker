@@ -1,18 +1,16 @@
 'use client'
-import { ChangeEventHandler, useId, useRef, useState } from 'react'
+import { useId, useRef, useState } from 'react'
 
 type Props = {
-  value: number
+  defaultValue?: number
   onChange: (value: number) => void
 }
 
-function Quantity({ onChange, value, ...props }: Props) {
+function Quantity({ onChange, defaultValue }: Props) {
   const id = useId()
   const checkboxId = `single_${id}`
-  const inputRef = useRef<HTMLInputElement>()
-
-  console.log({ props })
-
+  const inputRef = useRef<HTMLInputElement>(null)
+  const valueRef = useRef<number>()
   const [checked, setChecked] = useState(false)
 
   return (
@@ -24,22 +22,20 @@ function Quantity({ onChange, value, ...props }: Props) {
         data-testid="input-single"
         onChange={async (e) => {
           const checked = e.currentTarget.checked
-          const value = checked ? 0 : parseInt(inputRef.current?.value || '0') :
-          // checked ? onChange(0) : inputRef.current?.value:
-          onChange(value)
-          setChecked(e.currentTarget.checked)
+          onChange(checked ? 0 : parseInt(inputRef.current?.value || '0'))
+          setChecked(checked)
         }}
       />
 
       <input
         type="number"
         ref={inputRef}
-        defaultValue={value}
+        defaultValue={defaultValue}
         disabled={checked}
         data-testid="input-quantity"
         onChange={(e) => {
-          console.log('started input onChange')
-          !checked && onChange(parseInt(e.currentTarget.value))
+          valueRef.current = parseInt(e.currentTarget.value)
+          !checked && onChange(valueRef.current)
         }}
       />
     </>
