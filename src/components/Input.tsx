@@ -4,7 +4,7 @@ import FieldHelper from './FieldHelper'
 
 type Props = {
   error?: string
-  onActive: (isActive: boolean) => void
+  onActive?: (isActive: boolean) => void
 } & InputHTMLAttributes<HTMLInputElement>
 
 const Input = forwardRef<HTMLInputElement, Props>(
@@ -14,9 +14,9 @@ const Input = forwardRef<HTMLInputElement, Props>(
     const [focus, setFocus] = useState(false)
 
     useEffect(() => {
-      onActive(hover || focus)
+      typeof onActive === 'function' && onActive(hover || focus)
       return () => {
-        onActive(false)
+        typeof onActive === 'function' && onActive(false)
       }
     }, [focus, hover, onActive])
 
