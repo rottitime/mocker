@@ -15,7 +15,7 @@ type FormValues = {
 }
 
 const initialValues: FormValues = {
-  fields: [{ field_name: '', field_type: '' }],
+  fields: [{ field_name: '' }],
   rows: 10
 }
 
@@ -59,14 +59,15 @@ const MockRequirementsForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(({ fields, rows }) =>
+      noValidate
+      onSubmit={handleSubmit(({ fields, rows }) => {
         router.push(
           `/preview?${new URLSearchParams({
             fields: JSON.stringify(fields),
             rows: rows.toString()
           }).toString()}`
         )
-      )}
+      })}
     >
       {!!fields.length && (
         <table className="w-full">
@@ -138,7 +139,7 @@ const MockRequirementsForm = () => {
           title="Add another row"
           onClick={(e) => {
             e.preventDefault()
-            append({ field_name: '', field_type: '' }, { shouldFocus: false })
+            append({ field_name: '' }, { shouldFocus: false })
           }}
         >
           <PlusSmall className="text-lg" /> Add
@@ -149,14 +150,29 @@ const MockRequirementsForm = () => {
         <Controller
           control={control}
           name="rows"
-          render={({ field: { onChange }, formState: { defaultValues } }) => (
-            <Quantity defaultValue={defaultValues?.rows} onChange={onChange} />
+          rules={{
+            required: true,
+            validate: (value) =>
+              typeof value !== 'number' || isNaN(value) ? 'Enter a valid number' : true
+          }}
+          render={({
+            field: { onChange },
+            formState: { defaultValues },
+            fieldState: { error }
+          }) => (
+            <Quantity
+              defaultValue={defaultValues?.rows}
+              onChange={onChange}
+              error={error?.message}
+            />
           )}
         />
       </Row>
-      <Button disabled={!fields.length} data-testid="submit-button">
-        Submit
-      </Button>
+      <Row>
+        <Button disabled={!fields.length} data-testid="submit-button">
+          Submit
+        </Button>
+      </Row>
     </form>
   )
 }

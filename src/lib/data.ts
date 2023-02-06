@@ -2,7 +2,7 @@ import { Fields } from '@/types'
 import { faker } from '@faker-js/faker'
 
 export const fieldsToMockJson = (data: Fields[], rows = 0) => {
-  return [...Array(rows).keys()].map(() =>
+  const getData = () =>
     data.reduce(
       (a, { field_name, field_type }) => ({
         ...a,
@@ -10,10 +10,11 @@ export const fieldsToMockJson = (data: Fields[], rows = 0) => {
       }),
       {}
     )
-  )
+
+  return !!rows ? [...Array(rows).keys()].map(() => getData()) : getData()
 }
 
-const renderField = (type: string): string => {
+const renderField = (type?: string): string => {
   switch (type) {
     case 'email':
       return faker.internet.email()
