@@ -17,7 +17,7 @@ function Quantity({ onChange, defaultValue }: Props) {
 
   return (
     <>
-      <label htmlFor={checkboxId}></label>
+      <label htmlFor={checkboxId}>Single object</label>
       <input
         type="checkbox"
         id={checkboxId}
@@ -32,6 +32,7 @@ function Quantity({ onChange, defaultValue }: Props) {
       <label htmlFor={inputId}>Rows</label>
 
       <Input
+        type="number"
         id={inputId}
         data-testid="input-quantity"
         aria-label="Name"
@@ -45,19 +46,6 @@ function Quantity({ onChange, defaultValue }: Props) {
         }}
         // error={errors.fields?.[index]?.field_name && 'This is a required field'}
       />
-
-      {/* <input
-        type="number"
-        id={inputId}
-        ref={inputRef}
-        defaultValue={defaultValue}
-        disabled={checked}
-        data-testid="input-quantity"
-        onChange={(e) => {
-          valueRef.current = parseInt(e.currentTarget.value)
-          !checked && onChange(valueRef.current)
-        }}
-      /> */}
     </>
   )
 }

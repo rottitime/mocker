@@ -9,7 +9,7 @@ describe('Quantity', () => {
     expect(screen.getByTestId('input-single')).toBeInTheDocument()
     expect(screen.getByTestId('input-quantity')).toBeInTheDocument()
     expect(screen.getByTestId('input-quantity')).toBeEnabled()
-    expect(screen.getByTestId('input-quantity')).toHaveValue('8')
+    expect(screen.getByTestId('input-quantity')).toHaveValue(8)
   })
 
   it('clicking checkbox', async () => {
