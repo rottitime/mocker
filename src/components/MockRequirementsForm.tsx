@@ -59,9 +59,12 @@ const MockRequirementsForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(({ fields }) =>
+      onSubmit={handleSubmit(({ fields, rows }) =>
         router.push(
-          `/preview?${new URLSearchParams({ fields: JSON.stringify(fields) }).toString()}`
+          `/preview?${new URLSearchParams({
+            fields: JSON.stringify(fields),
+            rows: rows.toString()
+          }).toString()}`
         )
       )}
     >

@@ -1,13 +1,13 @@
 'use client'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/hljs'
-import { fieldsToMockJson } from '@/lib/data-test'
+import { fieldsToMockJson } from '@/lib/data'
 import { CopyButton } from '@/components'
 import { useUiContext } from '@/context/UiContext'
 
 const PreviewMock = () => {
-  const { fields } = useUiContext()
-  const text = fields && JSON.stringify(fieldsToMockJson(fields), null, 2)
+  const { fields, rows } = useUiContext()
+  const text = fields && JSON.stringify(fieldsToMockJson(fields, rows), null, 2)
 
   return (
     <div className="relative">

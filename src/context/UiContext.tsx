@@ -8,6 +8,7 @@ import { createContext, FC, ReactNode, useContext, useMemo, useState } from 'rea
 type Props = {
   totalFields: number
   focusField?: number
+  rows?: number
   setTotalFields: (p: number) => void
   setFocusField: (p?: number) => void
   fields: Fields[] | null
@@ -20,12 +21,14 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [focusField, setFocusField] = useState<number>()
   const searchParams = useSearchParams()
   const fieldsParam = searchParams.get('fields')
+  const rowsParam = searchParams.get('rows')
 
   const fields = useMemo(() => {
     return fieldsParam ? decodeObject(fieldsParam?.toString() || '[]') : null
   }, [fieldsParam])
 
   const context: Props = {
+    rows: rowsParam ? parseInt(rowsParam) : undefined,
     fields,
     totalFields,
     focusField,

@@ -112,7 +112,7 @@ describe('MockRequirementsForm', () => {
 
       await waitFor(async () =>
         expect(pushSpy).toHaveBeenCalledWith(
-          '/preview?fields=%5B%7B%22field_name%22%3A%22first_name%22%2C%22field_type%22%3A%22email%22%7D%2C%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D'
+          '/preview?fields=%5B%7B%22field_name%22%3A%22first_name%22%2C%22field_type%22%3A%22email%22%7D%2C%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D&rows=10'
         )
       )
     })
