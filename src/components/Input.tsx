@@ -40,29 +40,31 @@ const Input = forwardRef<HTMLInputElement, Props>(
             {label}
           </label>
         )}
-        <input
-          {...props}
-          ref={ref}
-          id={inputId}
-          autoFocus
-          className={`${className} w-full  rounded   bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none  ${
-            keyup ? 'keyup' : ''
-          }	`}
-          onKeyPress={() => {
-            setKeyup(true)
-            setTimeout(function () {
-              setKeyup(false)
-            }, 100)
-          }}
-          onBlur={(e) => {
-            setFocus(false)
-            if (typeof props.onBlur === 'function') props.onBlur(e)
-          }}
-          onFocus={() => setFocus(true)}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        />
-        {!!error && <FieldHelper type="error">{error}</FieldHelper>}
+        <div>
+          <input
+            {...props}
+            ref={ref}
+            id={inputId}
+            autoFocus
+            className={`${className} w-full  rounded   bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none  ${
+              keyup ? 'keyup' : ''
+            }	`}
+            onKeyPress={() => {
+              setKeyup(true)
+              setTimeout(function () {
+                setKeyup(false)
+              }, 100)
+            }}
+            onBlur={(e) => {
+              setFocus(false)
+              if (typeof props.onBlur === 'function') props.onBlur(e)
+            }}
+            onFocus={() => setFocus(true)}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          />
+          {!!error && <FieldHelper type="error">{error}</FieldHelper>}
+        </div>
       </>
     )
   }

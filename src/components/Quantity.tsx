@@ -1,6 +1,5 @@
 'use client'
 import { useId, useRef, useState } from 'react'
-import FieldHelper from './FieldHelper'
 import Input from './Input'
 import Toggle from './Toggle'
 
@@ -37,6 +36,7 @@ function Quantity({ onChange, error, defaultValue }: Props) {
             type="number"
             max={1000}
             id={inputId}
+            error={error}
             data-testid="input-quantity"
             aria-label="Name"
             placeholder="e.g. 10"
@@ -51,7 +51,6 @@ function Quantity({ onChange, error, defaultValue }: Props) {
           />
         </div>
       </div>
-      {!!error && <FieldHelper type="error">{error}</FieldHelper>}
     </>
   )
 }
