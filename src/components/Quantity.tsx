@@ -27,7 +27,7 @@ function Quantity({ onChange, defaultValue }: Props) {
         }}
       />
 
-      <div className="flex align-middle">
+      <div className="flex  items-center  before:mr-3 before:h-5 before:border-l ">
         <Input
           labelProps={{ className: 'mr-2 inline-flex items-center' }}
           label="Rows"

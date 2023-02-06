@@ -1,3 +1,4 @@
+export { default as Rows } from './Row'
 export { default as Toggle } from './Toggle'
 export { default as Header } from './Header'
 export { default as Quantity } from './Quantity'

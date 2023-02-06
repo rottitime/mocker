@@ -7,6 +7,7 @@ import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
 import { encodeObject } from '@/lib'
 import { Fields } from '@/types'
+import Row from './Row'
 
 type FormValues = {
   fields: Fields[]
@@ -128,7 +129,7 @@ const MockRequirementsForm = () => {
         </table>
       )}
 
-      <div className="text-right">
+      <Row className="text-right">
         <Button
           data-testid="add-button"
           title="Add another row"
@@ -139,16 +140,17 @@ const MockRequirementsForm = () => {
         >
           <PlusSmall className="text-lg" /> Add
         </Button>
-      </div>
+      </Row>
 
-      <Controller
-        control={control}
-        name="rows"
-        render={({ field: { onChange }, formState: { defaultValues } }) => (
-          <Quantity defaultValue={defaultValues?.rows} onChange={onChange} />
-        )}
-      />
-
+      <Row>
+        <Controller
+          control={control}
+          name="rows"
+          render={({ field: { onChange }, formState: { defaultValues } }) => (
+            <Quantity defaultValue={defaultValues?.rows} onChange={onChange} />
+          )}
+        />
+      </Row>
       <Button disabled={!fields.length} data-testid="submit-button">
         Submit
       </Button>
