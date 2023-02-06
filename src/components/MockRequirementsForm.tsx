@@ -12,13 +12,11 @@ import Row from './Row'
 type FormValues = {
   fields: Fields[]
   rows: number
-  single: boolean
 }
 
 const initialValues: FormValues = {
   fields: [{ field_name: '', field_type: '' }],
-  rows: 10,
-  single: false
+  rows: 10
 }
 
 const MockRequirementsForm = () => {
@@ -62,7 +60,9 @@ const MockRequirementsForm = () => {
   return (
     <form
       onSubmit={handleSubmit(({ fields }) =>
-        router.push(`/preview?fields=${encodeObject(fields)}`)
+        router.push(
+          `/preview?${new URLSearchParams({ fields: JSON.stringify(fields) }).toString()}`
+        )
       )}
     >
       {!!fields.length && (
@@ -112,7 +112,7 @@ const MockRequirementsForm = () => {
                     })}
                   />
                 </td>
-                <td className="text-right">
+                <td className="text-right align-middle ">
                   <button
                     className="disabled:opacity-30"
                     disabled={fields.length < 2}
