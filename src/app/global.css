@@ -29,10 +29,4 @@ th {
 }
 
 @layer components {
-  .vertical-form-block {
-    @apply flex align-middle;
-  }
-  .vertical-label {
-    @apply mr-2 inline-flex items-center;
-  }
 }

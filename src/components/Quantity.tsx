@@ -27,18 +27,18 @@ function Quantity({ onChange, defaultValue }: Props) {
         }}
       />
 
-      <div className="vertical-form-block">
-        <label htmlFor={inputId} className="vertical-label">
-          Rows
-        </label>
-
+      <div className="flex align-middle">
         <Input
+          labelProps={{ className: 'mr-2 inline-flex items-center' }}
+          label="Rows"
           type="number"
+          max={1000}
           id={inputId}
           data-testid="input-quantity"
           aria-label="Name"
           placeholder="e.g. 10"
           defaultValue={defaultValue}
+          className="max-w-xs"
           disabled={checked}
           ref={inputRef}
           onChange={(e) => {
