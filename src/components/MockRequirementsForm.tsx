@@ -15,6 +15,7 @@ type FormValues = {
 
 type Props = {
   defaultValues?: FormValues
+  live?: boolean
 }
 
 const initialValues: FormValues = {
@@ -22,7 +23,7 @@ const initialValues: FormValues = {
   rows: 10
 }
 
-const MockRequirementsForm = ({ defaultValues }: Props) => {
+const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   const router = useRouter()
   const {
     rows,
@@ -44,7 +45,7 @@ const MockRequirementsForm = ({ defaultValues }: Props) => {
     reset,
     register,
     handleSubmit,
-    formState: { errors, isDirty, isValid }
+    formState: { errors, isValid }
   } = useForm<FormValues>({
     defaultValues: defaultValues || initialValues,
     mode: 'onChange'
@@ -174,11 +175,13 @@ const MockRequirementsForm = ({ defaultValues }: Props) => {
           )}
         />
       </Row>
-      <Row>
-        <Button disabled={!isValid} data-testid="submit-button">
-          Submit
-        </Button>
-      </Row>
+      {!live && (
+        <Row>
+          <Button disabled={!isValid} data-testid="submit-button">
+            Submit
+          </Button>
+        </Row>
+      )}
     </form>
   )
 }

@@ -144,4 +144,12 @@ describe('MockRequirementsForm', () => {
       )
     })
   })
+
+  describe('live mode', () => {
+    it('renders', async () => {
+      renderWithProviders(<MockRequirementsForm live />)
+
+      expect(screen.queryByTestId('submit-button')).not.toBeInTheDocument()
+    })
+  })
 })
