@@ -20,9 +20,8 @@ const initialValues: FormValues = {
 
 const MockRequirementsForm = () => {
   const router = useRouter()
-  const { rows } = useUiContext()
-
   const {
+    rows,
     focusField,
     setFocusField,
     setTotalFields,

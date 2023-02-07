@@ -9,11 +9,13 @@ const cors = Cors({
 })
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { fields } = req.query
+  const { fields, rows } = req.query
+
+  const rowsAsInt = parseInt(typeof rows === 'string' ? rows : '10')
 
   if (fields) {
     const data: Fields[] = decodeObject(fields.toString())
     await runMiddleware(req, res, cors)
-    res.status(200).json(fieldsToMockJson(data, 0))
+    res.status(200).json(fieldsToMockJson(data, rowsAsInt))
   }
 }

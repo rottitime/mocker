@@ -12,6 +12,7 @@ type Props = {
   setTotalFields: (p: number) => void
   setFocusField: (p?: number) => void
   fields: Fields[] | null
+  params: string
 }
 
 const UIContext = createContext<Props>({} as Props)
@@ -23,17 +24,25 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const fieldsParam = searchParams.get('fields')
   const rowsParam = searchParams.get('rows')
 
+  const rows = rowsParam ? parseInt(rowsParam) : undefined
+
   const fields = useMemo(() => {
     return fieldsParam ? decodeObject(fieldsParam?.toString() || '[]') : null
   }, [fieldsParam])
 
+  const params = new URLSearchParams({
+    fields: JSON.stringify(fields),
+    rows: rows?.toString() || ''
+  }).toString()
+
   const context: Props = {
-    rows: rowsParam ? parseInt(rowsParam) : undefined,
+    rows,
     fields,
     totalFields,
     focusField,
     setTotalFields,
-    setFocusField
+    setFocusField,
+    params
   }
 
   return <UIContext.Provider value={context}>{children}</UIContext.Provider>
