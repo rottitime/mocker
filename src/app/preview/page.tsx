@@ -21,7 +21,7 @@ const PreviewMock = dynamic(() => import('@/components/PreviewMock'), {
 const PreviewPage = () => (
   <div className="flex gap-10 [&>div]:w-1/2 [&>div]:self-start">
     <Card>
-      <MockRequirementsForm />
+      <MockRequirementsForm live />
     </Card>
     <Card>
       <h2>Your API </h2>
@@ -29,7 +29,7 @@ const PreviewPage = () => (
 
       <hr className="mx-4 my-4" />
 
-      <h2>Sample data</h2>
+      <h2>Preview</h2>
       <PreviewMock />
     </Card>
   </div>
