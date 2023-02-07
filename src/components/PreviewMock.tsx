@@ -17,7 +17,7 @@ const PreviewMock = () => {
             {text}
           </SyntaxHighlighter>
           <div className="absolute top-2 right-2">
-            <CopyButton text={text} />
+            <CopyButton text={text} dark />
           </div>
         </>
       )}

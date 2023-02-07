@@ -10,7 +10,9 @@ const PreviewPage = () => (
       <MockRequirementsForm />
     </Card>
     <Card>
+      <h2>Your API </h2>
       <PreviewUrl />
+      <h2>Sample data</h2>
       <PreviewMock />
     </Card>
   </div>
