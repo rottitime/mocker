@@ -5,7 +5,6 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { Input, Button, Select, Quantity } from '@/components'
 import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
-import { encodeObject } from '@/lib'
 import { Fields } from '@/types'
 import Row from './Row'
 
@@ -21,6 +20,7 @@ const initialValues: FormValues = {
 
 const MockRequirementsForm = () => {
   const router = useRouter()
+  const { rows } = useUiContext()
 
   const {
     focusField,
@@ -161,7 +161,7 @@ const MockRequirementsForm = () => {
             fieldState: { error }
           }) => (
             <Quantity
-              defaultValue={defaultValues?.rows}
+              defaultValue={rows || defaultValues?.rows}
               onChange={onChange}
               error={error?.message}
             />
