@@ -46,9 +46,9 @@ const Input = forwardRef<HTMLInputElement, Props>(
             ref={ref}
             id={inputId}
             autoFocus
-            className={`${className} w-full  rounded   bg-slate-100 px-3.5 py-2 text-black outline-none transition-all duration-100 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none  ${
+            className={`${className} w-full  rounded  bg-slate-100 px-3.5 py-2 text-black    transition-all duration-100 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none  ${
               keyup ? 'keyup' : ''
-            }	`}
+            } ${error ? 'outline outline-2  outline-error' : 'outline-none'}	`}
             onKeyPress={() => {
               setKeyup(true)
               setTimeout(function () {
