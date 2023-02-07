@@ -1,25 +1,27 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useId } from 'react'
-import { useFieldArray, useForm } from 'react-hook-form'
-import { Input, Button, Select } from '@/components'
+import { Controller, useFieldArray, useForm } from 'react-hook-form'
+import { Input, Button, Select, Quantity } from '@/components'
 import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
-import { encodeObject } from '@/lib'
 import { Fields } from '@/types'
+import Row from './Row'
 
 type FormValues = {
   fields: Fields[]
+  rows: number
 }
 
 const initialValues: FormValues = {
-  fields: [{ field_name: '', field_type: '' }]
+  fields: [{ field_name: '' }],
+  rows: 10
 }
 
 const MockRequirementsForm = () => {
   const router = useRouter()
-
   const {
+    rows,
     focusField,
     setFocusField,
     setTotalFields,
@@ -56,9 +58,15 @@ const MockRequirementsForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(({ fields }) =>
-        router.push(`/preview?fields=${encodeObject(fields)}`)
-      )}
+      noValidate
+      onSubmit={handleSubmit(({ fields, rows }) => {
+        router.push(
+          `/preview?${new URLSearchParams({
+            fields: JSON.stringify(fields),
+            rows: rows.toString()
+          }).toString()}`
+        )
+      })}
     >
       {!!fields.length && (
         <table className="w-full">
@@ -107,7 +115,7 @@ const MockRequirementsForm = () => {
                     })}
                   />
                 </td>
-                <td className="text-right">
+                <td className="text-right align-middle ">
                   <button
                     className="disabled:opacity-30"
                     disabled={fields.length < 2}
@@ -124,23 +132,46 @@ const MockRequirementsForm = () => {
         </table>
       )}
 
-      <div className="text-right">
+      <Row className="text-right">
         <Button
           data-testid="add-button"
           title="Add another row"
           onClick={(e) => {
             e.preventDefault()
-            append({ field_name: '', field_type: '' }, { shouldFocus: false })
+            append({ field_name: '' }, { shouldFocus: false })
           }}
         >
           <PlusSmall className="text-lg" /> Add
         </Button>
-      </div>
+      </Row>
 
-      <br />
-      <Button disabled={!fields.length} data-testid="submit-button">
-        Submit
-      </Button>
+      <Row>
+        <Controller
+          control={control}
+          name="rows"
+          rules={{
+            required: true,
+            validate: (value) =>
+              typeof value !== 'number' || isNaN(value) ? 'Enter a valid number' : true
+          }}
+          render={({
+            field: { onChange },
+            formState: { defaultValues },
+            fieldState: { error }
+          }) => (
+            <Quantity
+              defaultValue={rows || defaultValues?.rows}
+              onChange={onChange}
+              error={error?.message}
+            />
+          )}
+        />
+      </Row>
+      <Row>
+        <Button disabled={!fields.length} data-testid="submit-button">
+          Submit
+        </Button>
+      </Row>
     </form>
   )
 }

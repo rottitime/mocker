@@ -20,7 +20,8 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops) 15%)'
       },
       colors: {
-        stone: '#1f1f26'
+        stone: '#1f1f26',
+        error: '#c00'
       },
       fontFamily: {
         sans: ['var(--font-poppins)'],

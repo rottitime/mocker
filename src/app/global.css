@@ -27,3 +27,6 @@ td {
 th {
   @apply text-left;
 }
+
+@layer components {
+}
