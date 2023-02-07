@@ -9,7 +9,16 @@ const Home = () => (
         Faking it till you make it, with our fake API app
       </h2>
 
-      <MockRequirementsForm />
+      <MockRequirementsForm
+        defaultValues={{
+          fields: [
+            { field_name: 'id', field_type: 'id' },
+            { field_name: 'first_name', field_type: 'first name' },
+            { field_name: 'email', field_type: 'email' }
+          ],
+          rows: 11
+        }}
+      />
     </Card>
     {/* <BackgroundDots /> */}
     {/* <BackgroundImage /> */}

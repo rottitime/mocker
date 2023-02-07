@@ -13,12 +13,16 @@ type FormValues = {
   rows: number
 }
 
+type Props = {
+  defaultValues?: FormValues
+}
+
 const initialValues: FormValues = {
   fields: [{ field_name: '' }],
   rows: 10
 }
 
-const MockRequirementsForm = () => {
+const MockRequirementsForm = ({ defaultValues }: Props) => {
   const router = useRouter()
   const {
     rows,
@@ -41,7 +45,10 @@ const MockRequirementsForm = () => {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormValues>({ defaultValues: initialValues, mode: 'onChange' })
+  } = useForm<FormValues>({
+    defaultValues: defaultValues || initialValues,
+    mode: 'onChange'
+  })
 
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
