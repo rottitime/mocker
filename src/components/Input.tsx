@@ -12,13 +12,17 @@ import FieldHelper from './FieldHelper'
 
 type Props = {
   error?: string
+  errorStylingOnly?: boolean
   label?: string
   labelProps?: DetailedHTMLProps<LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>
   onActive?: (isActive: boolean) => void
 } & InputHTMLAttributes<HTMLInputElement>
 
 const Input = forwardRef<HTMLInputElement, Props>(
-  ({ error, label, onActive, labelProps, className, ...props }, ref) => {
+  (
+    { error, label, onActive, errorStylingOnly, labelProps, className, ...props },
+    ref
+  ) => {
     const id = useId()
     const inputId = `input_${id}`
 
@@ -48,7 +52,11 @@ const Input = forwardRef<HTMLInputElement, Props>(
             autoFocus
             className={`${className} w-full  rounded  bg-slate-100 px-3.5 py-2 text-black    transition-all duration-100 disabled:border-slate-200 disabled:bg-slate-50 disabled:text-slate-500 disabled:shadow-none  ${
               keyup ? 'keyup' : ''
-            } ${error ? 'outline outline-2  outline-error' : 'outline-none'}	`}
+            } ${
+              !!error || errorStylingOnly
+                ? 'outline outline-2  outline-error'
+                : 'outline-none'
+            }	`}
             onKeyPress={() => {
               setKeyup(true)
               setTimeout(function () {
