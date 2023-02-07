@@ -1,4 +1,4 @@
-import { Fields } from '@/types'
+import { Fields, FieldType } from '@/types'
 import { faker } from '@faker-js/faker'
 
 export const fieldsToMockJson = (data: Fields[], rows = 0) => {
@@ -14,11 +14,11 @@ export const fieldsToMockJson = (data: Fields[], rows = 0) => {
   return !!rows ? [...Array(rows).keys()].map(() => getData()) : getData()
 }
 
-const renderField = (type?: string): string => {
+const renderField = (type?: FieldType): string => {
   switch (type) {
     case 'email':
       return faker.internet.email()
-    case 'first name':
+    case 'first_name':
       return faker.name.firstName()
     case 'id':
       return faker.datatype.uuid()

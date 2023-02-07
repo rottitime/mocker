@@ -13,7 +13,7 @@ const Home = () => (
         defaultValues={{
           fields: [
             { field_name: 'id', field_type: 'id' },
-            { field_name: 'first_name', field_type: 'first name' },
+            { field_name: 'first_name', field_type: 'first_name' },
             { field_name: 'email', field_type: 'email' }
           ],
           rows: 11

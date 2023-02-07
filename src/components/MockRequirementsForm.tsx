@@ -5,7 +5,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { Input, Button, Select, Quantity } from '@/components'
 import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
-import { Fields } from '@/types'
+import { Fields, FieldType } from '@/types'
 import Row from './Row'
 
 type FormValues = {
@@ -185,4 +185,4 @@ const MockRequirementsForm = ({ defaultValues }: Props) => {
 
 export default MockRequirementsForm
 
-const options = ['email', 'id', 'first name']
+const options: FieldType[] = ['email', 'id', 'first_name']

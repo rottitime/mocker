@@ -31,10 +31,37 @@ describe('MockRequirementsForm', () => {
     expect(screen.queryByTestId('fields.1.field_type')).not.toBeInTheDocument()
   })
 
+  it('with default values', async () => {
+    renderWithProviders(
+      <MockRequirementsForm
+        defaultValues={{
+          fields: [
+            { field_name: 'id', field_type: 'id' },
+            { field_name: 'first_name', field_type: 'first_name' },
+            { field_name: 'email', field_type: 'email' }
+          ],
+          rows: 11
+        }}
+      />
+    )
+
+    expect(screen.getByTestId('fields.0.field_name')).toHaveValue('id')
+    expect(screen.getByTestId('fields.0.field_type')).toHaveValue('id')
+
+    expect(screen.getByTestId('fields.1.field_name')).toHaveValue('first_name')
+    expect(screen.getByTestId('fields.1.field_type')).toHaveValue('first_name')
+
+    expect(screen.getByTestId('fields.2.field_name')).toHaveValue('email')
+    expect(screen.getByTestId('fields.2.field_type')).toHaveValue('email')
+
+    expect(screen.queryByTestId('fields.3.field_name')).not.toBeInTheDocument()
+    expect(screen.queryByTestId('fields.3.field_type')).not.toBeInTheDocument()
+  })
+
   it('prepopulated by query params', async () => {
     const initialData = [
       { field_name: 'my_field1', field_type: 'id' },
-      { field_name: 'my_field2', field_type: 'first name' }
+      { field_name: 'my_field2', field_type: 'first_name' }
     ]
     getSpy.mockImplementationOnce(() => JSON.stringify(initialData))
     renderWithProviders(<MockRequirementsForm />)
@@ -69,7 +96,7 @@ describe('MockRequirementsForm', () => {
   it('deletes correct row', async () => {
     const initialData = [
       { field_name: 'my_field1', field_type: 'id' },
-      { field_name: 'my_field2', field_type: 'first name' },
+      { field_name: 'my_field2', field_type: 'first_name' },
       { field_name: 'my_field3', field_type: 'email' }
     ]
     getSpy.mockImplementationOnce(() => JSON.stringify(initialData))
