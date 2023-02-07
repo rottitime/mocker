@@ -44,7 +44,7 @@ const MockRequirementsForm = ({ defaultValues }: Props) => {
     reset,
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isDirty, isValid }
   } = useForm<FormValues>({
     defaultValues: defaultValues || initialValues,
     mode: 'onChange'
@@ -175,7 +175,7 @@ const MockRequirementsForm = ({ defaultValues }: Props) => {
         />
       </Row>
       <Row>
-        <Button disabled={!fields.length} data-testid="submit-button">
+        <Button disabled={!isValid} data-testid="submit-button">
           Submit
         </Button>
       </Row>
