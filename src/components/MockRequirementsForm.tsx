@@ -66,7 +66,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   }, [fields.length, setTotalFields])
 
   useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
+    const subscription = watch((value, { type }) => {
       if (type === 'change') {
         router.push(
           `/preview?${new URLSearchParams({
