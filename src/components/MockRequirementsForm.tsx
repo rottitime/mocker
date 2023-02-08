@@ -45,6 +45,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
     reset,
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid }
   } = useForm<FormValues>({
     defaultValues: defaultValues || initialValues,
@@ -63,6 +64,20 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   useEffect(() => {
     setTotalFields(fields.length)
   }, [fields.length, setTotalFields])
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) => {
+      if (type === 'change') {
+        router.push(
+          `/preview?${new URLSearchParams({
+            fields: JSON.stringify(value.fields),
+            rows: value?.rows?.toString() || '10'
+          }).toString()}`
+        )
+      }
+    })
+    return () => subscription.unsubscribe()
+  }, [router, watch])
 
   return (
     <form
