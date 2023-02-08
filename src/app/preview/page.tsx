@@ -29,7 +29,7 @@ const PreviewPage = () => (
 
       <hr className="mx-4 my-4" />
 
-      <h2>Sample data</h2>
+      <h2>Preview</h2>
       <PreviewMock />
     </Card>
   </div>

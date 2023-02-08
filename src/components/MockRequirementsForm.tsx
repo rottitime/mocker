@@ -5,7 +5,7 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { Input, Button, Select, Quantity } from '@/components'
 import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
-import { Fields } from '@/types'
+import { Fields, FieldType } from '@/types'
 import Row from './Row'
 
 type FormValues = {
@@ -13,12 +13,17 @@ type FormValues = {
   rows: number
 }
 
+type Props = {
+  defaultValues?: FormValues
+  live?: boolean
+}
+
 const initialValues: FormValues = {
   fields: [{ field_name: '' }],
   rows: 10
 }
 
-const MockRequirementsForm = () => {
+const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   const router = useRouter()
   const {
     rows,
@@ -40,8 +45,11 @@ const MockRequirementsForm = () => {
     reset,
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<FormValues>({ defaultValues: initialValues, mode: 'onChange' })
+    formState: { errors, isValid }
+  } = useForm<FormValues>({
+    defaultValues: defaultValues || initialValues,
+    mode: 'onChange'
+  })
 
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
@@ -167,15 +175,17 @@ const MockRequirementsForm = () => {
           )}
         />
       </Row>
-      <Row>
-        <Button disabled={!fields.length} data-testid="submit-button">
-          Submit
-        </Button>
-      </Row>
+      {!live && (
+        <Row>
+          <Button disabled={!isValid} data-testid="submit-button">
+            Submit
+          </Button>
+        </Row>
+      )}
     </form>
   )
 }
 
 export default MockRequirementsForm
 
-const options = ['email', 'id', 'first name']
+const options: FieldType[] = ['email', 'id', 'first_name']
