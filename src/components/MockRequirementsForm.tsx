@@ -8,7 +8,6 @@ import { useUiContext } from '@/context/UiContext'
 import { Fields, FieldType } from '@/types'
 import Row from './Row'
 import useDebounce from '@/hooks/useDebounce'
-import { debounce } from '@/lib'
 
 type FormValues = {
   fields: Fields[]
@@ -29,8 +28,8 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   const router = useRouter()
   const {
     rows,
-    focusField,
-    setFocusField,
+    // focusField,
+    // setFocusField,
     setTotalFields,
     fields: currentFields
   } = useUiContext()
@@ -55,13 +54,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   })
 
   const watchAllFields = watch()
-  const debounceFields = useDebounce(JSON.stringify(watchAllFields), 5000)
-  // const debouncedFields = useDebounce(watchAllFields, 500)
-
-  // console.log({
-  //   //  debouncedFields,
-  //   // watchAllFields
-  // })
+  const debounceFields = useDebounce(JSON.stringify(watchAllFields), 500)
 
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
@@ -77,24 +70,17 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   }, [fields.length, setTotalFields])
 
   useEffect(() => {
-    if (isValid) {
-      console.log({ debounceFields })
+    if (live && isValid && debounceFields) {
+      const data = JSON.parse(debounceFields) as FormValues
+      router.push(
+        `/preview?${new URLSearchParams({
+          fields: JSON.stringify(data.fields),
+          rows: data?.rows?.toString()
+        }).toString()}`
+      )
     }
-  }, [debounceFields])
-
-  // useEffect(() => {
-  //   const subscription = watch((value, { type }) => {
-  //     if (type === 'change' && debounceFields) {
-  //       // router.push(
-  //       //   `/preview?${new URLSearchParams({
-  //       //     fields: JSON.stringify(value.fields),
-  //       //     rows: value?.rows?.toString() || '10'
-  //       //   }).toString()}`
-  //       // )
-  //     }
-  //   })
-  //   return () => subscription.unsubscribe()
-  // }, [router, watch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounceFields, live, router])
 
   return (
     <form
