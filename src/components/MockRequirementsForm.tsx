@@ -7,6 +7,8 @@ import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
 import { Fields, FieldType } from '@/types'
 import Row from './Row'
+import useDebounce from '@/hooks/useDebounce'
+import { debounce } from '@/lib'
 
 type FormValues = {
   fields: Fields[]
@@ -52,6 +54,15 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
     mode: 'onChange'
   })
 
+  const watchAllFields = watch()
+  const debounceFields = useDebounce(JSON.stringify(watchAllFields), 5000)
+  // const debouncedFields = useDebounce(watchAllFields, 500)
+
+  // console.log({
+  //   //  debouncedFields,
+  //   // watchAllFields
+  // })
+
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
     name: 'fields'
@@ -66,18 +77,24 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   }, [fields.length, setTotalFields])
 
   useEffect(() => {
-    const subscription = watch((value, { type }) => {
-      if (type === 'change') {
-        router.push(
-          `/preview?${new URLSearchParams({
-            fields: JSON.stringify(value.fields),
-            rows: value?.rows?.toString() || '10'
-          }).toString()}`
-        )
-      }
-    })
-    return () => subscription.unsubscribe()
-  }, [router, watch])
+    if (isValid) {
+      console.log({ debounceFields })
+    }
+  }, [debounceFields])
+
+  // useEffect(() => {
+  //   const subscription = watch((value, { type }) => {
+  //     if (type === 'change' && debounceFields) {
+  //       // router.push(
+  //       //   `/preview?${new URLSearchParams({
+  //       //     fields: JSON.stringify(value.fields),
+  //       //     rows: value?.rows?.toString() || '10'
+  //       //   }).toString()}`
+  //       // )
+  //     }
+  //   })
+  //   return () => subscription.unsubscribe()
+  // }, [router, watch])
 
   return (
     <form
@@ -113,10 +130,10 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
                       required: true,
                       maxLength: 30
                     })}
-                    onActive={(isActive) => {
-                      if (isActive) {
-                        setFocusField(index)
-                      } else if (focusField === index) setFocusField(undefined)
+                    onActive={(_isActive) => {
+                      // if (isActive) {
+                      //   setFocusField(index)
+                      // } else if (focusField === index) setFocusField(undefined)
                     }}
                     error={
                       errors.fields?.[index]?.field_name && 'This is a required field'
