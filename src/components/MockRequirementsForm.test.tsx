@@ -148,8 +148,20 @@ describe('MockRequirementsForm', () => {
   describe('live mode', () => {
     it('renders', async () => {
       renderWithProviders(<MockRequirementsForm live />)
-
       expect(screen.queryByTestId('submit-button')).not.toBeInTheDocument()
+    })
+
+    it('changes url as typing', async () => {
+      renderWithProviders(<MockRequirementsForm live />)
+
+      await userEvent.type(screen.getByTestId('fields.0.field_name'), 'id_key')
+      await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'id')
+
+      await waitFor(async () =>
+        expect(pushSpy).toHaveBeenCalledWith(
+          '/preview?fields=%5B%7B%22field_name%22%3A%22id_%22%2C%22field_type%22%3A%22%22%7D%5D&rows=10'
+        )
+      )
     })
   })
 })
