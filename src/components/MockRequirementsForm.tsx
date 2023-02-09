@@ -196,7 +196,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
       {!live && (
         <Row>
           <Button disabled={!isValid} data-testid="submit-button">
-            Submit
+            Create your API
           </Button>
         </Row>
       )}
