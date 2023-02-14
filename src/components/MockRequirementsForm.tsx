@@ -8,6 +8,7 @@ import { useUiContext } from '@/context/UiContext'
 import { Fields, FieldType } from '@/types'
 import Row from './Row'
 import useDebounce from '@/hooks/useDebounce'
+import { getParams } from '@/lib/url-utils'
 
 type FormValues = {
   fields: Fields[]
@@ -72,12 +73,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   useEffect(() => {
     if (live && isValid && debounceFields) {
       const data = JSON.parse(debounceFields) as FormValues
-      router.push(
-        `/preview?${new URLSearchParams({
-          fields: JSON.stringify(data.fields),
-          rows: data?.rows?.toString()
-        }).toString()}`
-      )
+      router.push(`/preview?${getParams(data.fields, data?.rows)}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debounceFields, live, router])
@@ -86,12 +82,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
     <form
       noValidate
       onSubmit={handleSubmit(({ fields, rows }) => {
-        router.push(
-          `/preview?${new URLSearchParams({
-            fields: JSON.stringify(fields),
-            rows: rows.toString()
-          }).toString()}`
-        )
+        router.push(`/preview?${getParams(fields, rows)}`)
       })}
     >
       {!!fields.length && (
