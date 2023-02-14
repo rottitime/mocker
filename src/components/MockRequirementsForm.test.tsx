@@ -15,6 +15,11 @@ jest.mock('next/navigation', () => ({
 }))
 
 describe('MockRequirementsForm', () => {
+  afterEach(() => {
+    jest.clearAllTimers()
+    jest.clearAllMocks()
+    jest.useRealTimers()
+  })
   it('renders', async () => {
     renderWithProviders(<MockRequirementsForm />)
 
@@ -123,20 +128,14 @@ describe('MockRequirementsForm', () => {
   describe('Submits', () => {
     it('with added rows', async () => {
       renderWithProviders(<MockRequirementsForm />)
-
       await userEvent.type(screen.getByTestId('fields.0.field_name'), 'first_name')
       await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'email')
-
       await userEvent.click(screen.getByTestId('add-button'))
-
       expect(screen.getByTestId('fields.1.field_name')).toBeVisible()
       expect(screen.getByTestId('fields.1.field_type')).toBeVisible()
-
       await userEvent.type(screen.getByTestId('fields.1.field_name'), 'id_key')
       await userEvent.selectOptions(screen.getByTestId('fields.1.field_type'), 'id')
-
       await userEvent.click(screen.getByTestId('submit-button'))
-
       await waitFor(async () =>
         expect(pushSpy).toHaveBeenCalledWith(
           '/preview?fields=%5B%7B%22field_name%22%3A%22first_name%22%2C%22field_type%22%3A%22email%22%7D%2C%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D&rows=10'
@@ -146,10 +145,22 @@ describe('MockRequirementsForm', () => {
   })
 
   describe('live mode', () => {
-    it('renders', async () => {
-      renderWithProviders(<MockRequirementsForm live />)
+    beforeEach(() => {
+      jest.spyOn(global, 'setTimeout')
+    })
 
-      expect(screen.queryByTestId('submit-button')).not.toBeInTheDocument()
+    it('debounce', async () => {
+      renderWithProviders(<MockRequirementsForm live />)
+      expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
+
+      await userEvent.type(screen.getByTestId('fields.0.field_name'), 'id_key')
+      await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'id')
+
+      expect(setTimeout).toHaveBeenCalled()
+
+      expect(pushSpy).toHaveBeenLastCalledWith(
+        '/preview?fields=%5B%7B%22field_name%22%3A%22%22%7D%5D&rows=10'
+      )
     })
   })
 })

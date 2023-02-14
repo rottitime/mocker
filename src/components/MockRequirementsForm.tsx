@@ -7,6 +7,8 @@ import { CrossCircle, PlusSmall } from '@/components/Icon'
 import { useUiContext } from '@/context/UiContext'
 import { Fields, FieldType } from '@/types'
 import Row from './Row'
+import useDebounce from '@/hooks/useDebounce'
+import { getParams } from '@/lib/url-utils'
 
 type FormValues = {
   fields: Fields[]
@@ -27,8 +29,8 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   const router = useRouter()
   const {
     rows,
-    focusField,
-    setFocusField,
+    // focusField,
+    // setFocusField,
     setTotalFields,
     fields: currentFields
   } = useUiContext()
@@ -45,11 +47,15 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
     reset,
     register,
     handleSubmit,
+    watch,
     formState: { errors, isValid }
   } = useForm<FormValues>({
     defaultValues: defaultValues || initialValues,
     mode: 'onChange'
   })
+
+  const watchAllFields = watch()
+  const debounceFields = useDebounce(live && JSON.stringify(watchAllFields), 500)
 
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
@@ -64,16 +70,19 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
     setTotalFields(fields.length)
   }, [fields.length, setTotalFields])
 
+  useEffect(() => {
+    if (live && isValid && debounceFields) {
+      const data = JSON.parse(debounceFields) as FormValues
+      router.push(`/preview?${getParams(data.fields, data?.rows)}`)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounceFields, live, router])
+
   return (
     <form
       noValidate
       onSubmit={handleSubmit(({ fields, rows }) => {
-        router.push(
-          `/preview?${new URLSearchParams({
-            fields: JSON.stringify(fields),
-            rows: rows.toString()
-          }).toString()}`
-        )
+        router.push(`/preview?${getParams(fields, rows)}`)
       })}
     >
       {!!fields.length && (
@@ -98,10 +107,10 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
                       required: true,
                       maxLength: 30
                     })}
-                    onActive={(isActive) => {
-                      if (isActive) {
-                        setFocusField(index)
-                      } else if (focusField === index) setFocusField(undefined)
+                    onActive={(_isActive) => {
+                      // if (isActive) {
+                      //   setFocusField(index)
+                      // } else if (focusField === index) setFocusField(undefined)
                     }}
                     error={
                       errors.fields?.[index]?.field_name && 'This is a required field'
@@ -178,7 +187,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
       {!live && (
         <Row>
           <Button disabled={!isValid} data-testid="submit-button">
-            Submit
+            Create your API
           </Button>
         </Row>
       )}

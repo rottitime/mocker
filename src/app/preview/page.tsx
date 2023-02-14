@@ -21,7 +21,11 @@ const PreviewMock = dynamic(() => import('@/components/PreviewMock'), {
 const PreviewPage = () => (
   <div className="flex gap-10 [&>div]:w-1/2 [&>div]:self-start">
     <Card>
-      <MockRequirementsForm />
+      <h2 className="text-xl">Contragulations, API Created</h2>
+      <p className="mb-4 text-sm">
+        Your input will now automatically update as you type.
+      </p>
+      <MockRequirementsForm live />
     </Card>
     <Card>
       <h2>Your API </h2>

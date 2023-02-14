@@ -1,6 +1,6 @@
 'use client'
 
-import { decodeObject } from '@/lib'
+import { decodeObject, getParams } from '@/lib'
 import { Fields } from '@/types'
 import { useSearchParams } from 'next/navigation'
 import { createContext, FC, ReactNode, useContext, useMemo, useState } from 'react'
@@ -8,7 +8,7 @@ import { createContext, FC, ReactNode, useContext, useMemo, useState } from 'rea
 type Props = {
   totalFields: number
   focusField?: number
-  rows?: number
+  rows: number
   setTotalFields: (p: number) => void
   setFocusField: (p?: number) => void
   fields: Fields[] | null
@@ -22,18 +22,13 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [focusField, setFocusField] = useState<number>()
   const searchParams = useSearchParams()
   const fieldsParam = searchParams.get('fields')
-  const rowsParam = searchParams.get('rows')
+  const rowsParam = searchParams.get('rows') || '10'
 
-  const rows = rowsParam ? parseInt(rowsParam) : undefined
+  const rows = parseInt(rowsParam)
 
   const fields = useMemo(() => {
     return fieldsParam ? decodeObject(fieldsParam?.toString() || '[]') : null
   }, [fieldsParam])
-
-  const params = new URLSearchParams({
-    fields: JSON.stringify(fields),
-    rows: rows?.toString() || ''
-  }).toString()
 
   const context: Props = {
     rows,
@@ -42,7 +37,7 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
     focusField,
     setTotalFields,
     setFocusField,
-    params
+    params: getParams(fields, rows)
   }
 
   return <UIContext.Provider value={context}>{children}</UIContext.Provider>

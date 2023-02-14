@@ -1,3 +1,4 @@
+import { Fields } from '@/types'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export const encodeObject = (data: object): string =>
@@ -23,3 +24,9 @@ export const runMiddleware = (
     })
   })
 }
+
+export const getParams = (fields: Fields[], rows: number): string =>
+  new URLSearchParams({
+    fields: JSON.stringify(fields),
+    rows: rows.toString()
+  }).toString()
