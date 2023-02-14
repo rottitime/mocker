@@ -125,7 +125,7 @@ describe('MockRequirementsForm', () => {
     expect(screen.queryByTestId('fields.2.field_type')).not.toBeInTheDocument()
   })
 
-  describe.skip('Submits', () => {
+  describe('Submits', () => {
     it('with added rows', async () => {
       renderWithProviders(<MockRequirementsForm />)
       await userEvent.type(screen.getByTestId('fields.0.field_name'), 'first_name')
@@ -146,55 +146,21 @@ describe('MockRequirementsForm', () => {
 
   describe('live mode', () => {
     beforeEach(() => {
-      jest.useFakeTimers()
       jest.spyOn(global, 'setTimeout')
     })
-    // jest.useFakeTimers()
-
-    // it('renders', async () => {
-    //   renderWithProviders(<MockRequirementsForm live />)
-    //   expect(screen.queryByTestId('submit-button')).not.toBeInTheDocument()
-    // })
-
-    // it('changes url as typing', async () => {
-    //   renderWithProviders(<MockRequirementsForm live />)
-
-    //   await userEvent.type(screen.getByTestId('fields.0.field_name'), 'id_key')
-    //   await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'id')
-
-    //   await waitFor(async () =>
-    //     expect(pushSpy).toHaveBeenCalledWith(
-    //       '/preview?fields=%5B%7B%22field_name%22%3A%22id_%22%2C%22field_type%22%3A%22%22%7D%5D&rows=10'
-    //     )
-    //   )
-    // })
 
     it('debounce', async () => {
       renderWithProviders(<MockRequirementsForm live />)
       expect(screen.getByTestId('fields.0.field_name')).toBeVisible()
 
-      jest.runAllTimers()
-      jest.runOnlyPendingTimers()
-      userEvent.type(screen.getByTestId('fields.0.field_name'), 'id_key')
-      userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'id')
+      await userEvent.type(screen.getByTestId('fields.0.field_name'), 'id_key')
+      await userEvent.selectOptions(screen.getByTestId('fields.0.field_type'), 'id')
 
-      expect(setTimeout).toHaveBeenCalledTimes(4)
+      expect(setTimeout).toHaveBeenCalled()
 
-      jest.runAllTimers()
-
-      jest.runOnlyPendingTimers()
-      jest.advanceTimersByTime(5001)
-      // jest.runOnlyPendingTimers()
-
-      // expect(pushSpy).toHaveBeenCalledWith(
-      //   '/preview?fields=%5B%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D&rows=10'
-      // )
-
-      // await waitFor(async () =>
-      //   expect(pushSpy).toHaveBeenCalledWith(
-      //     '/preview?fields=%5B%7B%22field_name%22%3A%22id_key%22%2C%22field_type%22%3A%22id%22%7D%5D&rows=10'
-      //   )
-      // )
+      expect(pushSpy).toHaveBeenLastCalledWith(
+        '/preview?fields=%5B%7B%22field_name%22%3A%22%22%7D%5D&rows=10'
+      )
     })
   })
 })

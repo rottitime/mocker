@@ -25,6 +25,7 @@ const initialValues: FormValues = {
 }
 
 const MockRequirementsForm = ({ defaultValues, live }: Props) => {
+  // console.log({ live, defaultValues })
   const router = useRouter()
   const {
     rows,
@@ -54,7 +55,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   })
 
   const watchAllFields = watch()
-  const debounceFields = useDebounce(JSON.stringify(watchAllFields), 500)
+  const debounceFields = useDebounce(live && JSON.stringify(watchAllFields), 500)
 
   const { fields, append, remove } = useFieldArray<FormValues>({
     control,
@@ -71,6 +72,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
 
   useEffect(() => {
     if (live && isValid && debounceFields) {
+      console.log({ live, isValid, debounceFields })
       const data = JSON.parse(debounceFields) as FormValues
       router.push(
         `/preview?${new URLSearchParams({
