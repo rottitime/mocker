@@ -25,7 +25,6 @@ const initialValues: FormValues = {
 }
 
 const MockRequirementsForm = ({ defaultValues, live }: Props) => {
-  // console.log({ live, defaultValues })
   const router = useRouter()
   const {
     rows,
@@ -72,7 +71,6 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
 
   useEffect(() => {
     if (live && isValid && debounceFields) {
-      console.log({ live, isValid, debounceFields })
       const data = JSON.parse(debounceFields) as FormValues
       router.push(
         `/preview?${new URLSearchParams({
