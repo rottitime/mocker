@@ -48,7 +48,8 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
     register,
     handleSubmit,
     watch,
-    formState: { errors, isValid }
+
+    formState: { errors, isValid, isSubmitting }
   } = useForm<FormValues>({
     defaultValues: defaultValues || initialValues,
     mode: 'onChange'
@@ -186,7 +187,7 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
       </Row>
       {!live && (
         <Row>
-          <Button disabled={!isValid} data-testid="submit-button">
+          <Button disabled={!isValid} data-testid="submit-button" loading={isSubmitting}>
             Create your API
           </Button>
         </Row>
