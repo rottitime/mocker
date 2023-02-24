@@ -39,4 +39,8 @@ const PreviewPage = () => (
   </div>
 )
 
+export const metadata = {
+  title: 'Preview - API Mock'
+}
+
 export default PreviewPage

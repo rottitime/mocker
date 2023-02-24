@@ -27,6 +27,12 @@ const pacifico = localFont({
   variable: '--font-pacifico'
 })
 
+export const metadata = {
+  title: 'API Mock',
+  description:
+    "Create and test your application's API calls with our user-friendly web app. Easily mock API responses and improve the performance of your app."
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${pacifico.variable} font-sans`}>
