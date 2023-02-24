@@ -1,4 +1,4 @@
-import { MockRequirementsForm, Card, Loading } from '@/components'
+import { MockRequirementsForm, Card, Loading, Share } from '@/components'
 import dynamic from 'next/dynamic'
 
 const PreviewUrl = dynamic(() => import('@/components/PreviewUrl'), {
@@ -28,6 +28,7 @@ const PreviewPage = () => (
       <MockRequirementsForm live />
     </Card>
     <Card>
+      <Share text={metadata.title} />
       <h2>Your API </h2>
       <PreviewUrl />
 
