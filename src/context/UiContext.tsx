@@ -21,8 +21,8 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [totalFields, setTotalFields] = useState(0)
   const [focusField, setFocusField] = useState<number>()
   const searchParams = useSearchParams()
-  const fieldsParam = searchParams.get('fields')
-  const rowsParam = searchParams.get('rows') || '10'
+  const fieldsParam = searchParams?.get('fields')
+  const rowsParam = searchParams?.get('rows') || '10'
 
   const rows = parseInt(rowsParam)
 
