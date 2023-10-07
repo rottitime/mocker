@@ -18,8 +18,17 @@ const PreviewMock = dynamic(() => import('@/components/PreviewMock'), {
   )
 })
 
+const Share = dynamic(() => import('@/components/Share'), {
+  ssr: false,
+  loading: () => (
+    <div className="text-center">
+      <Loading />
+    </div>
+  )
+})
+
 const PreviewPage = () => (
-  <div className="flex gap-10 [&>div]:w-1/2 [&>div]:self-start">
+  <div className="mb-2 flex gap-10 [&>div]:w-1/2 [&>div]:self-start">
     <Card>
       <h2 className="text-xl">Contragulations, API Created</h2>
       <p className="mb-4 text-sm">
@@ -29,7 +38,12 @@ const PreviewPage = () => (
     </Card>
     <Card>
       <h2>Your API </h2>
+
       <PreviewUrl />
+
+      <section className="mt-3 text-right">
+        <Share text={metadata.title} />
+      </section>
 
       <hr className="mx-4 my-4" />
 

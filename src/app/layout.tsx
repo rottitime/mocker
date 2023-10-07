@@ -1,5 +1,5 @@
 import './global.css'
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 import { UiProvider } from '@/context/UiContext'
 import { Header } from '@/components'
 import Analytics from '@/components/Analytics'

@@ -13,6 +13,7 @@ type Props = {
   setFocusField: (p?: number) => void
   fields: Fields[] | null
   params: string
+  url: string
 }
 
 const UIContext = createContext<Props>({} as Props)
@@ -30,6 +31,11 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
     return fieldsParam ? decodeObject(fieldsParam?.toString() || '[]') : null
   }, [fieldsParam])
 
+  const params = getParams(fields, rows)
+  const origin =
+    typeof window !== 'undefined' && window.location.origin ? window.location.origin : ''
+  const url = origin && params && `${origin}/api/mock?${params}`
+
   const context: Props = {
     rows,
     fields,
@@ -37,7 +43,8 @@ export const UiProvider: FC<{ children: ReactNode }> = ({ children }) => {
     focusField,
     setTotalFields,
     setFocusField,
-    params: getParams(fields, rows)
+    params,
+    url
   }
 
   return <UIContext.Provider value={context}>{children}</UIContext.Provider>
