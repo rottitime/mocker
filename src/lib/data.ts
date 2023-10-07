@@ -25,11 +25,11 @@ const renderField = (type?: FieldType): string => {
     case 'id':
       return faker.string.uuid()
     case 'sentence':
-        return faker.lorem.sentence()
+      return faker.lorem.sentence()
     case 'date':
-        return faker.date.anytime().toString()
+      return faker.date.anytime().toString()
     case 'image':
-        return faker.image.url()
+      return faker.image.url()
     default:
       return ''
   }
