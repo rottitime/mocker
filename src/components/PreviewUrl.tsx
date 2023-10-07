@@ -3,10 +3,7 @@ import { useUiContext } from '@/context/UiContext'
 import { CopyButton } from '@/components'
 
 const PreviewUrl = () => {
-  const { params } = useUiContext()
-  const origin =
-    typeof window !== 'undefined' && window.location.origin ? window.location.origin : ''
-  const url = origin && params && `${origin}/api/mock?${params}`
+  const { url } = useUiContext()
 
   return (
     <div className="relative  break-words rounded bg-gray-200 py-3 px-2">

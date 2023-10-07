@@ -1,4 +1,6 @@
+'use client'
 import { Facebook, Twitter, Whatsapp } from '@/components/Icon'
+import { useUiContext } from '@/context/UiContext'
 
 const data = (
   url: string,
@@ -26,10 +28,12 @@ type Props = {
 }
 
 function Share({ text }: Props) {
+  const { url } = useUiContext()
+
   return (
     <section className="print-hidden">
       <ul>
-        {data('', text).map(({ title, url, Icon }) => (
+        {data(url, text).map(({ title, url, Icon }) => (
           <li key={title}>
             <a href={url} target="_blank" rel="noopener noreferrer">
               <Icon />
