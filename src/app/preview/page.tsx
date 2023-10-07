@@ -1,4 +1,4 @@
-import { MockRequirementsForm, Card, Loading, Share } from '@/components'
+import { MockRequirementsForm, Card, Loading } from '@/components'
 import dynamic from 'next/dynamic'
 
 const PreviewUrl = dynamic(() => import('@/components/PreviewUrl'), {
@@ -10,6 +10,15 @@ const PreviewUrl = dynamic(() => import('@/components/PreviewUrl'), {
   )
 })
 const PreviewMock = dynamic(() => import('@/components/PreviewMock'), {
+  ssr: false,
+  loading: () => (
+    <div className="text-center">
+      <Loading />
+    </div>
+  )
+})
+
+const Share = dynamic(() => import('@/components/Share'), {
   ssr: false,
   loading: () => (
     <div className="text-center">
