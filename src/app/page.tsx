@@ -14,7 +14,9 @@ const Home = () => (
           fields: [
             { field_name: 'id', field_type: 'id' },
             { field_name: 'first_name', field_type: 'first_name' },
-            { field_name: 'email', field_type: 'email' }
+            { field_name: 'email', field_type: 'email' },
+            { field_name: 'is_admin', field_type: 'boolean' },
+
           ],
           rows: 11
         }}

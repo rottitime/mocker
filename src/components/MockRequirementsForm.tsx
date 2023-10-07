@@ -25,6 +25,8 @@ const initialValues: FormValues = {
   rows: 10
 }
 
+const options: FieldType[] = ['boolean', 'email', 'id', 'first_name']
+
 const MockRequirementsForm = ({ defaultValues, live }: Props) => {
   const router = useRouter()
   const {
@@ -198,4 +200,3 @@ const MockRequirementsForm = ({ defaultValues, live }: Props) => {
 
 export default MockRequirementsForm
 
-const options: FieldType[] = ['email', 'id', 'first_name']

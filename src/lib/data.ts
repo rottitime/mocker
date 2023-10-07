@@ -16,6 +16,8 @@ export const fieldsToMockJson = (data: Fields[], rows = 0) => {
 
 const renderField = (type?: FieldType): string => {
   switch (type) {
+    case 'boolean':
+      return Boolean(Math.random() < 0.5).toString()
     case 'email':
       return faker.internet.email()
     case 'first_name':
