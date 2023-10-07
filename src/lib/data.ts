@@ -16,12 +16,20 @@ export const fieldsToMockJson = (data: Fields[], rows = 0) => {
 
 const renderField = (type?: FieldType): string => {
   switch (type) {
+    case 'boolean':
+      return Boolean(Math.random() < 0.5).toString()
     case 'email':
       return faker.internet.email()
     case 'first_name':
-      return faker.name.firstName()
+      return faker.person.firstName()
     case 'id':
-      return faker.datatype.uuid()
+      return faker.string.uuid()
+    case 'sentence':
+        return faker.lorem.sentence()
+    case 'date':
+        return faker.date.anytime().toString()
+    case 'image':
+        return faker.image.url()
     default:
       return ''
   }
