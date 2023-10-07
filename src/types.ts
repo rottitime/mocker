@@ -1,4 +1,4 @@
-export type FieldType = 'email' | 'first_name' | 'id' | 'boolean'
+export type FieldType = 'email' | 'first_name' | 'id' | 'boolean' | 'sentence' | 'date' | 'image'
 
 export type Fields = {
   field_name: string
