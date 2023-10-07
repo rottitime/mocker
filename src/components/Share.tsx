@@ -31,18 +31,21 @@ function Share({ text }: Props) {
   const { url } = useUiContext()
 
   return (
-    <section className="print-hidden">
-      <ul>
-        {data(url, text).map(({ title, url, Icon }) => (
-          <li key={title}>
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              <Icon />
-              {title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className="inline-flex gap-5">
+      {data(url, text).map(({ title, url, Icon }) => (
+        <li key={title}>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center text-xs"
+            title={`Share on ${title}`}
+          >
+            <Icon className="mx-auto mb-1 block text-2xl" title="dede" />
+          </a>
+        </li>
+      ))}
+    </ul>
   )
 }
 
